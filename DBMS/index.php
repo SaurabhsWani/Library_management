@@ -5,78 +5,65 @@ title("Dashboard");
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
-			<h3> Dashboard</h3>
+			<h3> Manage Student</h3>
 		</div>
 		<!-- /widget-header -->
-		<div class="widget-content">
+		<a href="student.php">
+		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
-				<div class="widget-content">
+				<div class="widget-content" style="background: #6D6F6A;">
 					<div id="big_stats" class="cf">
-						<div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div><!-- .stat --> 
+						<div class="stat"> <img src="images/student.png" width="80px"><br></div> 
 					</div>
 				</div>
 				<!-- /widget-content --> 				
 			</div>
 		</div>
+		</a>
 	</div>
 	<!-- /widget -->
 </div>
+<!--Manage Staff  -->
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
-			<h3> Dashboard</h3>
+			<h3> Manage Staff</h3>
 		</div>
 		<!-- /widget-header -->
-		<div class="widget-content">
+		<a href="staff.php">
+		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
-				<div class="widget-content">
+				<div class="widget-content" style="background: #6D6F6A;">
 					<div id="big_stats" class="cf">
-						<div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div><!-- .stat --> 
+						<div class="stat"> <img src="images/staff.png" width="90px"><br></div> 
 					</div>
 				</div>
 				<!-- /widget-content --> 				
 			</div>
 		</div>
+		</a>
 	</div>
-	<!-- /widget -->
 </div>
+<!--Manage Books  -->
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
-			<h3> Dashboard</h3>
+			<h3> Manage Books</h3>
 		</div>
 		<!-- /widget-header -->
-		<div class="widget-content">
+		<a href="books.php">
+		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
-				<div class="widget-content">
+				<div class="widget-content" style="background: #6D6F6A;">
 					<div id="big_stats" class="cf">
-						<div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div><!-- .stat --> 
+						<div class="stat"> <img src="images/books.png" width="80px"><br></div> 
 					</div>
 				</div>
 				<!-- /widget-content --> 				
 			</div>
 		</div>
+		</a>
 	</div>
-	<!-- /widget -->
-</div>
-<div class="span3">
-	<div class="widget widget-nopad">
-		<div class="widget-header"> <i class="icon-list-alt"></i>
-			<h3> Dashboard</h3>
-		</div>
-		<!-- /widget-header -->
-		<div class="widget-content">
-			<div class="widget big-stats-container">
-				<div class="widget-content">
-					<div id="big_stats" class="cf">
-						<div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div><!-- .stat --> 
-					</div>
-				</div>
-				<!-- /widget-content --> 				
-			</div>
-		</div>
-	</div>
-	<!-- /widget -->
 </div>
 <?php
 include('footer.php');

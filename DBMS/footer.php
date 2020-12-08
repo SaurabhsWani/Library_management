@@ -15,7 +15,6 @@
   <script src="js/chart.min.js" type="text/javascript"></script> 
   <script src="js/bootstrap.js"></script>
   <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
-
   <script src="js/base.js"></script> 
   <script>     
 
@@ -137,6 +136,77 @@
         ]
       });
     });
+    
+            var doughnutData = [
+            {
+                value: 30,
+                color: "#F7464A"
+            },
+            {
+                value: 50,
+                color: "#46BFBD"
+            },
+            {
+                value: 100,
+                color: "#FDB45C"
+            },
+            {
+                value: 40,
+                color: "#949FB1"
+            },
+            {
+                value: 120,
+                color: "#4D5360"
+            }
+
+            ];
+
+            var myDoughnut = new Chart(document.getElementById("donut-chart").getContext("2d")).Doughnut(doughnutData);
+            var pieData = [
+            {
+                value: 30,
+                color: "#F38630"
+            },
+            {
+                value: 50,
+                color: "#E0E4CC"
+            },
+            {
+                value: 100,
+                color: "#69D2E7"
+            }
+
+            ];
+
+            var myPie = new Chart(document.getElementById("pie-chart").getContext("2d")).Pie(pieData);
+
+            var chartData = [
+            {
+             value: Math.random(),
+             color: "#D97041"
+         },
+         {
+             value: Math.random(),
+             color: "#C7604C"
+         },
+         {
+             value: Math.random(),
+             color: "#21323D"
+         },
+         {
+             value: Math.random(),
+             color: "#9D9B7F"
+         },
+         {
+             value: Math.random(),
+             color: "#7D4F6D"
+         },
+         {
+             value: Math.random(),
+             color: "#584A5E"
+         }
+         ];
+         var myPolarArea = new Chart(document.getElementById("line-chart").getContext("2d")).PolarArea(chartData);
   </script><!-- /Calendar -->
 </body>
 </html>
