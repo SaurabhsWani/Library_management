@@ -23,6 +23,27 @@ title("Dashboard");
 	</div>
 	<!-- /widget -->
 </div>
+<div class="span3">
+	<div class="widget widget-nopad">
+		<div class="widget-header"> <i class="icon-list-alt"></i>
+			<h3> List of Student having Fine</h3>
+		</div>
+		<!-- /widget-header -->
+		<a href="fine.php">
+		<div class="widget-content" style="background:#FF5722;">
+			<div class="widget big-stats-container">
+				<div class="widget-content" style="background:#FF5722;">
+					<div id="big_stats" class="cf">
+						<div class="stat"> <img src="images/student.png" width="80px"><br></div> 
+					</div>
+				</div>
+				<!-- /widget-content --> 				
+			</div>
+		</div>
+		</a>
+	</div>
+	<!-- /widget -->
+</div>
 <!--Manage Staff  -->
 <div class="span3">
 	<div class="widget widget-nopad">
