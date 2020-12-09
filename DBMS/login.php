@@ -49,7 +49,7 @@
 	</div> <!-- /content -->	
 </div> <!-- /account-container -->
 <div class="login-extra">
-	<a href="#">Reset Password</a>
+	<a href="reset_pass/frgt_pass.php">Reset Password</a>
 </div> <!-- /login-extra -->
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.js"></script>
