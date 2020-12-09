@@ -45,12 +45,10 @@
 				</span>									
 				<button type="submit" class="button btn btn-success btn-large">Sign In</button>	
 			</div> <!-- .actions -->			
-		</form>		
+		</form>		<a href="reset_pass/frgt_pass.php">Reset Password</a>
 	</div> <!-- /content -->	
 </div> <!-- /account-container -->
-<div class="login-extra">
-	<a href="reset_pass/frgt_pass.php">Reset Password</a>
-</div> <!-- /login-extra -->
+<!-- /login-extra -->
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/signin.js"></script>
