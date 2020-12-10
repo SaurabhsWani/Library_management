@@ -1,7 +1,6 @@
 <?php
 function title($page){
 	echo '<title>'.$_SESSION['sn'].' | '.$page.'</title>';
-	$GLOBALS['selpage']=$page;
 }
 
 function message()
@@ -60,10 +59,10 @@ function diff_date($date1,$date2,$category)
 	elseif($category=="D"){ if($months>=1){return $months*30+$days;}else{return $days;} }
 	else{return $years."y-".$months."m-".$days."d";}
 }
-function show(){
+function show($msg){
 	echo "<div class='alert alert-info'>
 	<button type='button' class='close' data-dismiss='alert'>&times;</button>
-	<center><strong>Warning!</strong> No PRN Found</center>
+	<center><strong>Warning!</strong> No ".$msg." Found</center>
 	</div>";
 }
 ?>

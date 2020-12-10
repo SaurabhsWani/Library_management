@@ -66,7 +66,32 @@ elseif(isset($_GET['prn']))
 	if(update("student","status","'1'","WHERE prn='$prn'"))
 		{poutput("Registered Successfully","gt.php?prn=$prn&submit=");}else{noutput("Unsuccessful To Registered","gt.php?prn=$prn&submit=");}
 }
-else{
+//for uploading image start
+elseif (isset($_POST['updateimg'])) 
+{
+	if(is_uploaded_file($_FILES['userimage']['tmp_name']))
+	{
+		$image=$_FILES['userimage']['tmp_name'];
+		$image2=$_FILES['userimage']['name'];
+	}
+	else
+		{noutput("Unsuccessful To Update Profile Image Try again","profile.php");}
+	$sid=$_POST['sid'];
+	$target="images/".$_FILES['userimage']['name'];
+	if(update("staff","image","'$image2'","WHERE sid=$sid"))
+	{
+		if(move_uploaded_file($image,$target))
+		{
+			poutput("Profile Image Updated Successfully","profile.php");}
+			else
+				{noutput("Unsuccessful To Update Profile Image","profile.php");
+		}
+	}
+	else{noutput("Unsuccessful To Update Profile Image","profile.php");}
+}
+//for uploading image end
+else
+{
 	$_POST['return']=$_POST['renew']="";
 	header('Location:gt.php?prn=&submit=');
 }

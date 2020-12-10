@@ -1,6 +1,9 @@
 <?php
 include('header.php');
 title("IMPORT-EXPORT");
+if(isset($_GET['prn'])){
+	$prn=$_GET['prn'];
+}else{$prn="";}
 ?>
 <div class="span12">    
 	<div class="widget ">
@@ -17,7 +20,7 @@ title("IMPORT-EXPORT");
 								<label class="control-label" for="radiobtns">Student PRN  </label>
 								<div class="controls">
 									<div class="input-append">
-										<input class="span2 m-wrap" id="appendedInputButton" type="text" name="prn" autocomplete="off">
+										<input class="span2 m-wrap" value="<?php echo $prn;?>" id="appendedInputButton" type="text" name="prn" autocomplete="off">
 										<button class="btn" type="submit" name="submit">Search!</button>
 									</div>
 								</div>	<!-- /controls -->			
@@ -66,7 +69,7 @@ title("IMPORT-EXPORT");
 							if($std['status']!="1"){echo "Not Registered";}else{echo "Registered";}
 							echo "</b>";
 							if($std['status']!="1"){
-								echo "<a href='reg.php?prn=".$std['prn']."' title='Register' name='register' class='btn btn-mini btn-success'><i class='btn-icon-only icon-ok'></i>";}
+								echo "<a href='op.php?prn=".$std['prn']."' title='Register' name='register' class='btn btn-mini btn-success'><i class='btn-icon-only icon-ok'></i>";}
 
 								echo "
 								</a>
@@ -82,7 +85,7 @@ title("IMPORT-EXPORT");
 				</div>
 				<?php 
 				$row=mysqli_num_rows($result);
-				if($row==0){show();}
+				if($row==0){show('Data OF PRN '.$prn.' ');}
 				?><br />
 				<!-- /widget-content --> 
 				<div class="widget-header"> <i class="icon-th-list"></i>
@@ -201,7 +204,7 @@ title("IMPORT-EXPORT");
 		</div>
 		<?php 
 		$row=mysqli_num_rows($result);
-		if($row==0){show();}
+		if($row==0){show('Book Data Of PRN '.$prn.' ');}
 		?>
 	</div>
 <?php }  ?>

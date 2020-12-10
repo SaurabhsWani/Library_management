@@ -8,7 +8,7 @@ title("Dashboard");
 			<h3> Manage Student</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="student.php">
+		<a href="student.php?page=Dashboard">
 		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
 				<div class="widget-content" style="background: #6D6F6A;">
@@ -29,7 +29,7 @@ title("Dashboard");
 			<h3> List of Student having Fine</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="fine.php">
+		<a href="fine.php?page=Dashboard">
 		<div class="widget-content" style="background:#FF5722;">
 			<div class="widget big-stats-container">
 				<div class="widget-content" style="background:#FF5722;">
@@ -51,7 +51,7 @@ title("Dashboard");
 			<h3> Manage Staff</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="staff.php">
+		<a href="staff.php?page=Dashboard">
 		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
 				<div class="widget-content" style="background: #6D6F6A;">
@@ -72,7 +72,7 @@ title("Dashboard");
 			<h3> Manage Books</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="books.php">
+		<a href="books.php?page=Dashboard">
 		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
 				<div class="widget-content" style="background: #6D6F6A;">
