@@ -148,11 +148,17 @@ title("IMPORT-EXPORT");
 								}
 								elseif($stb['returned']!='0000-00-00 00:00:00')
 								{}
-							else{
+							elseif($stb['returned']=='0000-00-00 00:00:00'&&$stb['renew']=='0000-00-00 00:00:00'){
 								echo 15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D");
+							}else{}
+							echo"</cen
+							ter></td>";
+
+							if ((abs(diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']=='0000-00-00 00:00:00'&&$stb['returned']=='0000-00-00 00:00:00')
+							{
+								echo"<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>";
 							}
-							echo"</center></td>";
-							if ((diff_date($stb['took'],date("Y-m-d H:i:s"),"D")>15) && $stb['renew']=='0000-00-00 00:00:00'&&$stb['returned']=='0000-00-00 00:00:00')
+							elseif ((abs(diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']!='0000-00-00 00:00:00'&&$stb['returned']=='0000-00-00 00:00:00')
 							{
 								echo"<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>";
 							}

@@ -57,7 +57,7 @@ function diff_date($date1,$date2,$category)
 	$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
 	if ($category=="Y"){return $years;}
 	elseif($category=="M"){return $months;}
-	elseif($category=="D"){return $days;}
+	elseif($category=="D"){ if($months>=1){return $months*30+$days;}else{return $days;} }
 	else{return $years."y-".$months."m-".$days."d";}
 }
 function show(){
