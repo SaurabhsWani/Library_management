@@ -26,15 +26,15 @@ title("Dashboard");
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
-			<h3> List of Student having Fine</h3>
+			<h3> Manage Fines</h3>
 		</div>
 		<!-- /widget-header -->
 		<a href="fine.php?page=Dashboard">
-		<div class="widget-content" style="background:#FF5722;">
+		<div class="widget-content" style="background:#6D6F6A;">
 			<div class="widget big-stats-container">
-				<div class="widget-content" style="background:#FF5722;">
+				<div class="widget-content" style="background:#6D6F6A;">
 					<div id="big_stats" class="cf">
-						<div class="stat"> <img src="images/student.png" width="80px"><br></div> 
+						<div class="stat"> <img src="images/fine.png" width="80px"><br></div> 
 					</div>
 				</div>
 				<!-- /widget-content --> 				
@@ -78,6 +78,26 @@ title("Dashboard");
 				<div class="widget-content" style="background: #6D6F6A;">
 					<div id="big_stats" class="cf">
 						<div class="stat"> <img src="images/books.png" width="80px"><br></div> 
+					</div>
+				</div>
+				<!-- /widget-content --> 			
+			</div>
+		</div>
+		</a>
+	</div>
+</div>
+<div class="span3">
+	<div class="widget widget-nopad">
+		<div class="widget-header"> <i class="icon-list-alt"></i>
+			<h3> Manage Magazines</h3>
+		</div>
+		<!-- /widget-header -->
+		<a href="Magazine.php?page=Dashboard">
+		<div class="widget-content" style="background: #6D6F6A;">
+			<div class="widget big-stats-container">
+				<div class="widget-content" style="background: #6D6F6A;">
+					<div id="big_stats" class="cf">
+						<div class="stat"> <img src="images/mag.png" width="80px"><br></div> 
 					</div>
 				</div>
 				<!-- /widget-content --> 				

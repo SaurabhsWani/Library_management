@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
                     $_SESSION['sn']=$idd['Name'];
                     $_SESSION['sid']=$idd['sid'];
                     $_SESSION['username']=$idd['Email'];
-                    echo '<script>window.location="index.php"</script>'; 
+                    echo '<script>window.location="index.php?page=Dashboard"</script>'; 
                 }           
             }
             else

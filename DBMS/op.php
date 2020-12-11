@@ -9,22 +9,22 @@ if(isset($_POST['renew']))
 {
 	if(update("student_book","renew",'CURRENT_TIMESTAMP',"WHERE prn='$prn' AND book_name='$book' "))
 	{
-		poutput("Book <b>Renewed</b> Successfully","gt.php?prn=$prn&submit=");
+		poutput("Book <b>Renewed</b> Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 	else
 	{
-		noutput("Unsuccessful To <b>Renewed</b> Book","gt.php?prn=$prn&submit=");
+		noutput("Unsuccessful To <b>Renewed</b> Book","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 }
 elseif(isset($_POST['return']))
 {
 	if(update("student_book","returned",'CURRENT_TIMESTAMP',"WHERE prn='$prn' AND book_name='$book' "))
 	{
-		poutput("Book <b>Returned</b> Successfully","gt.php?prn=$prn&submit=");
+		poutput("Book <b>Returned</b> Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 	else
 	{
-		noutput("Unsuccessful To <b>Returned</b> Book","gt.php?prn=$prn&submit=");
+		noutput("Unsuccessful To <b>Returned</b> Book","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 }
 //for return or renew end
@@ -35,11 +35,11 @@ elseif(isset($_POST['add']))
 	$add="INSERT INTO student_book(prn,book_name,took) VALUES ('$prn','$book',CURRENT_TIMESTAMP)";    
 	if ($connection->query($add)) 
 	{
-		poutput("Book Added Successfully","gt.php?prn=$prn&submit=");
+		poutput("Book Added Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 	else
 	{
-		noutput("Unsuccessful To Add Book","gt.php?prn=$prn&submit=");
+		noutput("Unsuccessful To Add Book","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 	}
 }
 //for adding new book end
@@ -64,7 +64,7 @@ elseif(isset($_GET['prn']))
 {
 	$prn=$_GET['prn'];
 	if(update("student","status","'1'","WHERE prn='$prn'"))
-		{poutput("Registered Successfully","gt.php?prn=$prn&submit=");}else{noutput("Unsuccessful To Registered","gt.php?prn=$prn&submit=");}
+		{poutput("Registered Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}else{noutput("Unsuccessful To Registered","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
 }
 //for uploading image start
 elseif (isset($_POST['updateimg'])) 
@@ -93,6 +93,6 @@ elseif (isset($_POST['updateimg']))
 else
 {
 	$_POST['return']=$_POST['renew']="";
-	header('Location:gt.php?prn=&submit=');
+	header('Location:gt.php?page=IMPORT-EXPORT&prn=&submit=');
 }
 ?>

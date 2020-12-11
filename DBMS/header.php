@@ -13,6 +13,7 @@ securityforpage();?>
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/pages/dashboard.css" rel="stylesheet">
+<link href="css/pages/signin.css" rel="stylesheet" type="text/css">
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,7 +49,7 @@ securityforpage();?>
     <div class="container">
       <ul class="mainnav">        
         <li class=" <?php if($_GET['page']=='Dashboard'){ echo 'active';} ?>"><a href="index.php?page=Dashboard"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li class="<?php if($_GET['page']=='IMPORT-EXPORT'){ echo 'active';} ?>"><a href="gt.php?page=IMPORT-EXPORT"><i class="icon-list-alt"></i><span>GIVE-TAKE</span> </a> </li>
+        <li class="<?php if($_GET['page']=='IMPORT-EXPORT'){ echo 'active';} ?>"><a href="gt.php?page=IMPORT-EXPORT"><i class="icon-list-alt"></i><span>Students</span> </a> </li>
         <li class="<?php if($_GET['page']=='Books'){ echo 'active';} ?>"><a href="gt1.php?page=Books"><i class="icon-book"></i><span>Books</span> </a> </li>
         <li class="<?php if($_GET['page']=='Statistics'){ echo 'active';} ?>"><a href="gt2.php?page=Statistics"><i class="icon-bar-chart"></i><span>Statistics</span> </a> </li>
         <?php ?>

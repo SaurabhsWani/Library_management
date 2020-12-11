@@ -20,6 +20,7 @@ if(isset($_GET['prn'])){
 								<label class="control-label" for="radiobtns">Student PRN  </label>
 								<div class="controls">
 									<div class="input-append">
+										<input type="hidden" name="page" value="IMPORT-EXPORT">
 										<input class="span2 m-wrap" value="<?php echo $prn;?>" id="appendedInputButton" type="text" name="prn" autocomplete="off">
 										<button class="btn" type="submit" name="submit">Search!</button>
 									</div>
