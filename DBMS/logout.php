@@ -12,8 +12,8 @@ include('fun.php');
 	{
 		$username=$_COOKIE['username'];
 		$password=$_COOKIE['password'];
-		setcookie('username', time()-1);
-		setcookie('password', time()-1);
+		setcookie('username' ,null, time()-1);
+		setcookie('password' ,null, time()-1);
 	}
 	header('Location:login.php');
 // }

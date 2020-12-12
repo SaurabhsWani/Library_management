@@ -1084,11 +1084,11 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing {
 	_overflow: hidden
 }
-.fc-header-left .fc-button-prev .fc-button-inner {background: url('../img/icons-sa7c41345d9.png') no-repeat; background-position: 0 -351px;
+.fc-header-left .fc-button-prev .fc-button-inner {background: url('../images/icons-sa7c41345d9.png') no-repeat; background-position: 0 -351px;
 height: 16px;
 width: 11px;}
 
-.fc-header-left .fc-button-next .fc-button-inner {background: url('../img/icons-sa7c41345d9.png') no-repeat; background-position: 0 -367px;
+.fc-header-left .fc-button-next .fc-button-inner {background: url('../images/icons-sa7c41345d9.png') no-repeat; background-position: 0 -367px;
 height: 16px;
 width: 11px;}
 

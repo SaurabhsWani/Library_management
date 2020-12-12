@@ -6,7 +6,7 @@ Bootstrap Admin Template by EGrappler.com
 
 
 /** Base Body Styles **/
-body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'Open Sans';}
+body{ background: url(../../images/body-bg.png); color:#838383; font: 13px/1.7em 'Open Sans';}
 
 
 .account-container {
@@ -53,9 +53,9 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
-.username-field { background: url(../../img/signin/user.png) no-repeat; }
+.username-field { background: url(../../images/signin/user.png) no-repeat; }
 
-.password-field { background: url(../../img/signin/password.png) no-repeat; }
+.password-field { background: url(../../images/signin/password.png) no-repeat; }
 
 
 
@@ -101,7 +101,7 @@ span.login-checkbox > input[type='checkbox'] + label {
     font-size: 12px;
     line-height: 1.2em;
     
-    background: url(../../img/signin/check.png) no-repeat 0 0;
+    background: url(../../images/signin/check.png) no-repeat 0 0;
     
     cursor: pointer;
 }
@@ -137,14 +137,14 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	width: 157px; 
 	display: block;
 	
-	background: url(../../img/signin/twitter_btn.png) no-repeat; 
+	background: url(../../images/signin/twitter_btn.png) no-repeat; 
 	
 }
 
 .fb {
 	width: 162px; 
 	
-	background: url(../../img/signin/fb_btn.png) no-repeat; 	
+	background: url(../../images/signin/fb_btn.png) no-repeat; 	
 }
 
 .twitter:active, .fb:active {
