@@ -52,6 +52,8 @@ if(isset($_GET['prn'])){
 							<th><center> Branch</center></th>
 							<th><center> Status</center></th>
 							<th><center> Mobile</center></th>
+							<th><center>Gender</center></th>
+							<th><center>Address</center></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -76,6 +78,8 @@ if(isset($_GET['prn'])){
 								</a>
 								</center></td>
 								<td><center> ".$std['mobile']."</center></td>
+								<td><center> ".$std['Gender']."</center></td>
+								<td><center> ".$std['Address']."</center></td>
 								</tr>";
 								$status=$std['status'];
 								$prn=$std['prn'];

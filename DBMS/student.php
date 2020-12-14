@@ -114,6 +114,8 @@ title("Student");
             <th><center>Branch</center></th>
             <th><center>Status</center></th>
             <th><center>Mobile</center></th>
+            <th><center>Gender</center></th>
+            <th><center>Address</center></th>
           </tr>
         </thead>
         <tbody>
@@ -139,7 +141,10 @@ title("Student");
               echo "<a href='reg.php?prn=".$std['prn']."' title='Register' name='register' class='btn btn-mini btn-success'><i class='btn-icon-only icon-ok' style='margin: 0px 0px 20px;'></i>";}
 
               echo "</a></center></td>
-              <td><center> ".$std['mobile']."</center></td></tr>";
+              <td><center> ".$std['mobile']."</center></td>
+              <td><center> ".$std['Gender']."</center></td>
+              <td><center> ".$std['Address']."</center></td>
+              </tr>";
             }
             ?>
           </tbody>
