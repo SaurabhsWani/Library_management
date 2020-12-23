@@ -115,7 +115,7 @@ if(isset($_GET['prn'])){
 													<input type="hidden" name="prn" value="<?php echo($prn) ?>">
 												<?php } ?>
 												<input class="span2 m-wrap" id="appendedInputButton" type="text" name="book" autocomplete="off">
-												<button class="btn" type="submit" name="add">Add</button>
+												<input class="btn" type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
 									</div>
@@ -185,7 +185,7 @@ if(isset($_GET['prn'])){
 						elseif(($row!=0 && $status=="1") && ($stb['renew']!='0000-00-00 00:00:00' && $stb['returned']=='0000-00-00 00:00:00'))
 						{
 							$book_count=$book_count+1;
-							echo"<button type='submit' title='Return' name='return' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";	
+							echo"<button type='submit' title='Return' value='return' name='op' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";	
 						}elseif (($row!=0 && $status!="1")) {
 							# code...
 						}
@@ -194,7 +194,7 @@ if(isset($_GET['prn'])){
 							$book_count=$book_count+1;
 							echo"<button type='submit' title='Return' name='return' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";		
 							echo "
-							<button type='submit' title='Renew' name='renew' class='btn btn-primary btn-small'><i class='btn-icon-only icon-large icon-repeat'></i></button>";
+							<button type='submit' title='Renew' value='Renew' name='op' class='btn btn-primary btn-small'><i class='btn-icon-only icon-large icon-repeat'></i></button>";
 						}
 						echo "</form>
 						</td></tr>"; 

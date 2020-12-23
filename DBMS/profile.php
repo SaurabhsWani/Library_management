@@ -25,7 +25,7 @@ title("Profile");
 									<div class="input-append">
 										<input type="hidden" name="sid" value="<?php echo $_SESSION['sid'];?>">
 										<input type="file" name="userimage" id="userimage" class="span4" required="">
-										<button type="submit" class="btn btn-info" name="updateimg">Update</button>
+										<button type="submit" class="btn btn-info" value="updateimg" name="op">Update</button>
 									</div>
 								</div>	<!-- /controls -->			
 							</div>
@@ -57,7 +57,7 @@ title("Profile");
 									<input type="text" disabled class="span4" id="LL" value="<?php echo $idd['last_login'];?>">
 								</div> <!-- /controls -->				
 							</div>
-							<button type="submit" name="update" class="btn btn-primary">Save</button> 
+							<button type="submit" name="op" value="updateprof" class="btn btn-primary">Save</button> 
 						</form>
 					</div>
 				</div>
