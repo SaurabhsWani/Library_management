@@ -1,7 +1,7 @@
 <?php
 //for return or renew start
 $time=date("Y-m-d H:i:s");
-include('security.php');include('fun.php');include('dbconfig.php');
+include('security.php');include('fun.php');
 securityforpage();
 $prn=$_POST['prn'];
 $book=$_POST['book'];
@@ -10,8 +10,8 @@ if(isset($_GET['prn']))
 {
 	$prn=$_GET['prn'];
 	if(update("student","status","'1'","WHERE prn='$prn'"))
-		{poutput("Registered Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
-	else{noutput("Unsuccessful To Registered","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
+		{poutput("Registered Successfully","student.php?page=Dashboard");}
+	else{noutput("Unsuccessful To Registered","student.php?page=Dashboard");}
 }
 else{
 	switch ($action) {
@@ -62,11 +62,11 @@ else{
 		$add1="INSERT INTO student(prn,name,email,mobile,branch,admi_year,Gender,Address) VALUES ('$prn','$name','$email','$mobile','$branch','$date','$gender','$address')";    
 		if ($connection->query($add1)) 
 		{
-			poutput("Student Data Added Successfully","student.php?page=students&prn=$prn&submit=");
+			poutput("Student Data Added Successfully","student.php?page=Dashboard&prn=$prn&submit=");
 		}
 		else
 		{
-			noutput("Unsuccessful To Add Student","student.php?page=students&prn=$prn&submit=");
+			noutput("Unsuccessful To Add Student","student.php?page=Dashboard&prn=$prn&submit=");
 		}
 		break;
 //for updating profile start
@@ -114,11 +114,11 @@ else{
 		$add="DELETE FROM student WHERE prn=$prn";    
 		if ($connection->query($add)) 
 		{
-			poutput("Student removed successfully","student.php?page=students&prn=$prn&submit=");
+			poutput("Student removed successfully","student.php?page=Dashboard&prn=$prn&submit=");
 		}
 		else
 		{
-			noutput("Unsuccessful To Remove Data","student.php?page=students&prn=$prn&submit=");
+			noutput("Unsuccessful To Remove Data","student.php?page=Dashboard&prn=$prn&submit=");
 		}
 		break;
 //To remove student end

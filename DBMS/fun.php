@@ -5,7 +5,7 @@ function title($page){
 
 function message()
 {
-	if (isset($_SESSION['Success'])&&$_SESSION['Success']!='') 
+	if (isset($_SESSION['Success']) && $_SESSION['Success']!='') 
 	{
 		echo '<div class="alert alert-success">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>'.$_SESSION['Success'].'</div>';
