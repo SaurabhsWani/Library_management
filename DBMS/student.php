@@ -224,7 +224,7 @@ title("Student");
           if(isset($_GET['cnt']))
             $cnt = $_GET['cnt'];
 
-          $result=select("*","student","WHERE stid <= $cnt ORDER BY prn");
+          $result=select("*","student","ORDER BY prn LIMIT $cnt");
           while($std=mysqli_fetch_assoc($result))
           {
             echo "<tr>

@@ -20,6 +20,7 @@ title("Fine");
 						<th>Fine Rs</th>
 						<th>Contact</th>
 						<th>Email</th>
+						<th>SEND MAIL</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,6 +39,7 @@ title("Fine");
 							<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>
 							<td>".$stb['mobile']."</td>
 							<td>".$stb['Email']."</td>
+							<td><button type='submit' title='MAIL' name='MAIL' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button></td></td>
 							</tr>";
 						}
 						elseif($stb['renew']=='0000-00-00 00:00:00' && (diff_date($stb['took'],date("Y-m-d H:i:s"),"D")>15)) 
@@ -51,6 +53,7 @@ title("Fine");
 							<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>
 							<td>".$stb['mobile']."</td>
 							<td>".$stb['Email']."</td>
+							<td><button type='submit' title='MAIL' name='MAIL' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button></td>
 							</tr>";
 						}
 						else{}

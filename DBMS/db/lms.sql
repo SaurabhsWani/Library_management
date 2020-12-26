@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 08:49 AM
+-- Generation Time: Dec 26, 2020 at 10:31 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `lms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `magazine`
+--
+
+CREATE TABLE `magazine` (
+  `id` int(11) NOT NULL,
+  `name` varchar(11) NOT NULL,
+  `author` varchar(11) NOT NULL,
+  `copyid` varchar(11) NOT NULL,
+  `dateadd` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `magazine`
+--
+
+INSERT INTO `magazine` (`id`, `name`, `author`, `copyid`, `dateadd`) VALUES
+(17, 'lucy', 'saurabh ', '17-1', '2020-12-26 00:00:00'),
+(18, 'Harry Porte', 'saurabh ', '18-1', '2020-12-26 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -45,7 +67,7 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`sid`, `Name`, `Email`, `password`, `branch`, `image`, `Date`, `last_login`, `Login_ip`) VALUES
-(1, 'Saurabh wani', 'ssw@gmail.com', 'asdf', 'Computer', 'student.png', '2020-12-05', '2020-12-10 10:57:28', '::1');
+(1, 'Saurabh s. Wani', 'er.saurabhwani1@gmail.com', 'asdf', 'Computer', 'IMG20201107085744.jpg', '2020-12-05', '2020-12-24 09:06:57', '::1');
 
 -- --------------------------------------------------------
 
@@ -71,10 +93,10 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi_year`, `status`, `Gender`, `Address`) VALUES
-(1, '1431039', 'Ajita Sunil Patil', 'ajitapatil15@gmail.com', 9420156972, 'Electrical Engineering', '2017-06-15', '0', 'Female', 'Shree Sai Nager ,Varangaon\nTal.Bhusawal\nDist.Jalgaon\n'),
-(2, '1501028', 'Sachin Chandrasen kshirsagar', 'kshirsagarsachinc@gmail.com', 9130165187, 'Mechanical Engineering', '2017-06-15', '0', 'Male', 'At-awasagaon, tq-kaij, dist-beed'),
-(3, '1521014', 'Lalit anil Dhanrale', 'dhanrale8@gmail.com', 9975766476, 'Instrumentation Engineering', '2017-06-15', '0', 'Male', 'Plot no 62 parakh nagar jalgaon'),
-(4, '1531021', 'Mangesh Bhagwanrao Gaigodhane ', 'mangeshgaigodhane58@gmail.com', 9665044110, 'Electrical Engineering', '2017-06-15', '0', 'Male', 'Jintur'),
+(1, '1431039', 'Ajita Sunil Patil', 'ajitapatil15@gmail.com', 9420156972, 'Electrical Engineering', '2017-06-15', '1', 'Female', 'Shree Sai Nager ,Varangaon\nTal.Bhusawal\nDist.Jalgaon\n'),
+(2, '1501028', 'Sachin Chandrasen kshirsagar', 'kshirsagarsachinc@gmail.com', 9130165187, 'Mechanical Engineering', '2017-06-15', '1', 'Male', 'At-awasagaon, tq-kaij, dist-beed'),
+(3, '1521014', 'Lalit anil Dhanrale', 'dhanrale8@gmail.com', 9975766476, 'Instrumentation Engineering', '2017-06-15', '1', 'Male', 'Plot no 62 parakh nagar jalgaon'),
+(4, '1531021', 'Mangesh Bhagwanrao Gaigodhane ', 'mangeshgaigodhane58@gmail.com', 9665044110, 'Electrical Engineering', '2017-06-15', '1', 'Male', 'Jintur'),
 (5, '1552374', 'Ankita Surupsing Valvi ', 'valviankita23@gmail.com', 9075278716, 'Civil Engineering', '2017-06-15', '0', 'Female', 'At porambi  Tal. - Akkalkuwa \nDist - Nandurbar'),
 (6, '1552375', 'Abhishek Nandkishor Yeole', 'abhishekyeole17@gmail.com', 7020255130, 'Civil Engineering', '2017-06-15', '0', 'Male', 'Shiv colony Jalgaon'),
 (7, '1601028', 'Sahil Raghunath Lekami', 'lekamisahil@gmail.com', 9420397620, 'Mechanical Engineering', '2017-06-15', '0', 'Male', 'Nagpur'),
@@ -151,7 +173,6 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (78, '1711021', 'Akshay Bandu Kangude', 'akangude1191@gmail.com', 9764954920, 'Electronics & Telecommunicatio', '2017-06-15', '0', 'Male', 'Jayakwadi vasahat, Georai, Beed'),
 (79, '1711023', 'Ajit Ledange', 'ajitledange123@gmail.com', 8999143223, 'Electronics & Telecommunicatio', '2017-06-15', '0', 'Male', 'At kalmula tq purna dist parbhani'),
 (80, '1711028', 'Rahul bhagwat more', 'rahulmore02016@gmail.com', 9168589229, 'Electronics & Telecommunicatio', '2018-06-15', '0', 'Male', 'At mahukheda post khadki tal jamner dist Jalgaon State Maharashtra'),
-(81, '1711029', 'Vitthal Dinkar Nakhate ', 'vikidn0@gmail.com', 9075573337, 'Electronics & Telecommunicatio', '2018-06-15', '0', 'Male', 'Kolhe Nagar Jalgaon'),
 (82, '1711032', 'Ajaysing Vijaysing Pardeshi', 'apardeshi243@gmail.com', 8830483177, 'Electronics & Telecommunicatio', '2017-06-15', '0', 'Male', 'At Betawad Kh., Tal Jamner, Dist Jalgaon 425310.'),
 (83, '1711037', 'Rashi sanjay Kuber', 'rashikuber844@gmail.com', 7083332269, 'Electronics & Telecommunicatio', '2017-06-15', '0', 'Female', 'Beltarodi road Nagpur'),
 (84, '1711038', 'Sanket shyam Raut', 'sanketraut384@gmail.com', 9834216850, 'Electronics & Telecommunicatio', '2017-06-15', '0', 'Male', 'At palodi tq darwha dist yavatmal'),
@@ -346,9 +367,9 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (273, '1801035', 'Saurabh Prakash Musale', 'saurabh30112000@gmail.com', 9177844992, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'Onkareshwar nagar,near taroda bk,nanded'),
 (274, '1801036', 'Nagpure Shreyash Sunil', 'ssnagpure5jee@gmail.com', 8975149719, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'At post Mul, dist. Chandrapur - 441224'),
 (275, '1801037', 'Nikita Rajendra Singh', 'singh.nikita9808@gmail.com', 9359506032, 'Mechanical Engineering', '2018-06-15', '0', 'Female', 'Government College of engineering jalgaon '),
-(276, '1801038', 'Tushar Pralhad Nikrat', 'tusharnikrat16@gmail.com', 9112858066, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'Shivnagar ghati road old jalna');
+(276, '1801038', 'Tushar Pralhad Nikrat', 'tusharnikrat16@gmail.com', 9112858066, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'Shivnagar ghati road old jalna'),
+(277, '1801039', 'Nitin Shrikant Talmale', 'talmalenitin@gmail.com', 7030323692, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'Pauni 441910');
 INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi_year`, `status`, `Gender`, `Address`) VALUES
-(277, '1801039', 'Nitin Shrikant Talmale', 'talmalenitin@gmail.com', 7030323692, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'Pauni 441910'),
 (278, '1801040', 'Aditi Sunilkumar Patil', 'aditisunilpatil05@gmail.com', 8379925938, 'Mechanical Engineering', '2018-06-15', '0', 'Female', '95 A,shree-villa,sai nagar,Buldana'),
 (279, '1801043', 'Gayatri Prakash Patil ', 'gayatripatil596@gmail.com', 7038073668, 'Mechanical Engineering', '2018-06-15', '0', 'Female', '13, sarveshwar nagar WB Road, Dhule'),
 (280, '1801045', 'Sudhir Bhaskar Patil ', '216sudhirpatil@gmail.com', 9075693745, 'Mechanical Engineering', '2018-06-15', '0', 'Male', 'At post Bharvas Tal- Amalner Dist-Jalgaon'),
@@ -542,9 +563,9 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (468, '1841018', 'Achal pramod gohade ', 'achalgohade0505@gmail.com', 7218693719, 'Computer Engineering', '2018-06-15', '0', 'Female', 'At post dhotardi dist ,akola .'),
 (469, '1841019', 'Komal Laxman Jadhav', 'komalljadhav2000@gmail.com', 9975691395, 'Computer Engineering', '2018-06-15', '0', 'Female', 'Kalinka mata temple, tulsai nagar, jalgaon'),
 (470, '1841020', 'Kulbhushan Ramkishan Jadhav', 'kulbhushanjadhav54448@gmail.com', 8999736716, 'Computer Engineering', '2018-06-15', '0', 'Male', 'At Dohara, post. Bori, tq. Jintur,dist. Parbhani, 431401'),
-(471, '1841022', 'Aaditya Sudhir Joshi', 'aadityajoshi291020@gmail.com', 8380860010, 'Computer Engineering', '2018-06-15', '0', 'Male', '34, new parvati kale nagar, mohadi road, Jalgaon'),
-(472, '1841023', 'Prasad Mukund Joshi', 'Prasadjoshi9969@gmail.com', 9730667159, 'Computer Engineering', '2018-06-15', '0', 'Male', 'Near old post office, parola, Jalgaon'),
-(473, '1841024', 'Vishal Jyotiram Kangude', 'vishalkangude8383@gmail.com', 8380938383, 'Computer Engineering', '2018-06-15', '0', 'Male', 'At.Bhadangwadi Po.Madalmohi Tq.Georai Dist.Beed'),
+(471, '1841022', 'Aaditya Sudhir Joshi', 'aadityajoshi291020@gmail.com', 8380860010, 'Computer Engineering', '2018-06-15', '1', 'Male', '34, new parvati kale nagar, mohadi road, Jalgaon'),
+(472, '1841023', 'Prasad Mukund Joshi', 'Prasadjoshi9969@gmail.com', 9730667159, 'Computer Engineering', '2018-06-15', '1', 'Male', 'Near old post office, parola, Jalgaon'),
+(473, '1841024', 'Vishal Jyotiram Kangude', 'vishalkangude8383@gmail.com', 8380938383, 'Computer Engineering', '2018-06-15', '1', 'Male', 'At.Bhadangwadi Po.Madalmohi Tq.Georai Dist.Beed'),
 (474, '1841025', 'Amisha Rajendra kothawade ', 'kothawadeamisha20@gmail.com', 9370103597, 'Computer Engineering', '2018-06-15', '0', 'Female', 'Dnyaneshwar colony ,Marvad road Amalner district Jalgaon '),
 (475, '1841026', 'Vedant Vinayak Kulkarni', 'kulvedant2000@gmail.com', 8530250091, 'Computer Engineering', '2018-06-15', '0', 'Male', 'Cidco, aurangabad, Maharashtra'),
 (476, '1841027', 'Bhavna Surendra Latare', 'bhavnalatare@gmail.com', 7507700288, 'Computer Engineering', '2018-06-15', '0', 'Female', 'House no. 841, Ward no. 10, Shashtri ward, near panchayat samiti colony, Gondia'),
@@ -620,9 +641,9 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (546, '1851052', 'Jayant Mohan Uttarwar ', 'jayantuttarwar2000@gmail.com', 9421513085, 'Civil Engineering', '2018-06-15', '0', 'Male', '20/29 Muktainagar ,Jalgaon, 425001'),
 (547, '1851053', 'Vaishnavi Bhagwan Patil ', 'vbpatil942@gmail.com', 9370705285, 'Civil Engineering', '2018-06-15', '0', 'Female', 'Jalgaon '),
 (548, '1851054', 'Prajwal Anil Veer', 'prajwalveer4@gmail.com', 7218956594, 'Civil Engineering', '2018-06-15', '0', 'Male', 'Ambika Nagar Darwha, Dist. yavatmal'),
-(549, '1851056', 'Anjali Rama Wankhade ', 'anjaliwankhade2000@gmail.com', 9552888073, 'Civil Engineering', '2018-06-15', '0', 'Female', 'At post ugwa ,akola ');
+(549, '1851056', 'Anjali Rama Wankhade ', 'anjaliwankhade2000@gmail.com', 9552888073, 'Civil Engineering', '2018-06-15', '0', 'Female', 'At post ugwa ,akola '),
+(550, '1851057', 'Khomesh Ganesh Yerne ', 'yernekhomesh2018@gmail.com', 9370123669, 'Civil Engineering', '2018-06-15', '0', 'Male', 'At post paraswada ta tirora dist Gondia ');
 INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi_year`, `status`, `Gender`, `Address`) VALUES
-(550, '1851057', 'Khomesh Ganesh Yerne ', 'yernekhomesh2018@gmail.com', 9370123669, 'Civil Engineering', '2018-06-15', '0', 'Male', 'At post paraswada ta tirora dist Gondia '),
 (551, '1851059', 'Saurabh Prashant Zalte', 'saurabhpz158@gmail.com', 918308000000, 'Civil Engineering', '2018-06-15', '0', 'Male', 'At. Ranantri , Po.Ambashu ,Ta.Chikhali , Dist.Buldhana'),
 (552, '1851060', 'Rupali dilip zope', 'rupalizope2020@gmail.com', 8888188747, 'Civil Engineering', '2018-06-15', '0', 'Female', 'Zope wada varangaon'),
 (553, '1852101', 'Sayyed Nouman Mushirali', 'sayyednouman53@gmail.com', 9404175366, 'Civil Engineering', '2017-06-15', '0', 'Male', 'Latur'),
@@ -870,7 +891,13 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (795, '1952207', 'Rutuja Arun Sangale ', 'rutujasangale2001@gmail.com', 9373211935, 'Civil Engineering', '2018-06-15', '0', 'Female', 'At post Tamswadi, Niphad, Nashik '),
 (796, '1952208', 'Shinde Aishwarya Uddhavrao', 'shindeaishwarya30@gmail.com', 8080369556, 'Civil Engineering', '2018-06-15', '0', 'Female', 'At post- Helamb, Tq- Deoni,Dist-Latur'),
 (797, '1952209', 'Madhav Ravindra Wakhare', 'madhavwakhare@gmail.com', 9730573252, 'Civil Engineering', '2018-06-15', '0', 'Male', 'Behind Lokmahavidhlaya Bachlor road Wardha'),
-(798, '2012101', 'Vaibhav Gopal Dhamankar', 'vaibhavdhamankar300@gmail.com', 9623659389, 'Electronics & Telecommunicatio', '2019-06-15', '0', 'Male', 'At post hatala.Tq sengaon.dist hingoli');
+(798, '2012101', 'Vaibhav Gopal Dhamankar', 'vaibhavdhamankar300@gmail.com', 9623659389, 'Electronics & Telecommunicatio', '2019-06-15', '0', 'Male', 'At post hatala.Tq sengaon.dist hingoli'),
+(801, '2031025', 'Arnold Sweznagger', 'Arnold@Terminater.com', 1478965412, 'Electrical Engineering', '0000-00-00', '0', 'Male', 'Near USA, Terminator Park, Jalgaon'),
+(803, '1588055', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule'),
+(804, '2031026', 'Arnold Sweznagger', 'Arnold@terminater.com', 1478965412, 'Electrical Engineering', '0000-00-00', '0', 'Male', 'Near USA, Terminator Park, Jalgaon'),
+(806, '1588056', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule'),
+(807, '1952013', 'Silvester ', 'Silvester@Rambo.com', 1100223344, 'Mechanical Engineering', '0000-00-00', '0', 'Male', 'Near USA, Rambo nagar, Jalgaon'),
+(808, '1952016', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule');
 
 -- --------------------------------------------------------
 
@@ -902,11 +929,19 @@ INSERT INTO `student_book` (`sr_no`, `prn`, `book_name`, `took`, `returned`, `re
 (13, '1841058', 'aahat', '2020-12-07 19:25:39', '0000-00-00 00:00:00', '2020-11-08 00:00:00', 0),
 (14, '1841058', 'tukaram ', '2020-12-07 19:37:10', '0000-00-00 00:00:00', '2020-10-20 00:00:00', 0),
 (15, '1841023', 'jjjjj', '2020-11-20 15:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(16, '1841023', 'jalgaon', '2020-12-11 11:22:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
+(16, '1841023', 'jalgaon', '2020-12-11 11:22:19', '0000-00-00 00:00:00', '2020-12-22 11:58:27', 0),
+(17, '1841023', 'ppp', '2020-12-22 11:20:27', '0000-00-00 00:00:00', '2020-12-22 11:56:30', 0),
+(18, '1841023', 'sss', '2020-12-22 11:22:28', '2020-12-22 11:58:30', '2020-12-22 11:26:49', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `magazine`
+--
+ALTER TABLE `magazine`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `staff`
@@ -933,6 +968,12 @@ ALTER TABLE `student_book`
 --
 
 --
+-- AUTO_INCREMENT for table `magazine`
+--
+ALTER TABLE `magazine`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
@@ -942,13 +983,13 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `stid` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=799;
+  MODIFY `stid` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=809;
 
 --
 -- AUTO_INCREMENT for table `student_book`
 --
 ALTER TABLE `student_book`
-  MODIFY `sr_no` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sr_no` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

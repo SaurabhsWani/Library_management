@@ -1,4 +1,4 @@
-<?php include('security.php');include('fun.php');
+<?php include_once('security.php');include_once('fun.php');
 securityforpage();?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +8,6 @@ securityforpage();?>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-  rel="stylesheet">
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/pages/dashboard.css" rel="stylesheet">
