@@ -1,6 +1,7 @@
 <?php  
 include('header.php');
 title("Statistics");
+if ($_SESSION['category']==0):
 ?>
 <div class="span6">
     <div class="widget">
@@ -85,4 +86,7 @@ title("Statistics");
 
 <?php
 include('footer.php');
-?>
+endif; 
+if ($_SESSION['category']!=0):
+echo "<script>window.location='index.php?page=Dashboard';</script>"; 
+endif;?> 

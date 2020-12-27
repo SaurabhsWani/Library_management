@@ -2,6 +2,11 @@
 include('header.php');
 title("Dashboard");
 ?>
+<style>
+.disabled-link {
+  pointer-events: none;
+}
+</style>
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
@@ -45,13 +50,14 @@ title("Dashboard");
 	<!-- /widget -->
 </div>
 <!--Manage Staff  -->
+<?php if ($_SESSION['category']==0):?>
 <div class="span3">
 	<div class="widget widget-nopad">
 		<div class="widget-header"> <i class="icon-list-alt"></i>
 			<h3> Manage Staff</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="staff.php?page=Dashboard">
+		<a href="staff.php?page=Dashboard" >
 		<div class="widget-content" style="background: #6D6F6A;">
 			<div class="widget big-stats-container">
 				<div class="widget-content" style="background: #6D6F6A;">
@@ -65,6 +71,7 @@ title("Dashboard");
 		</a>
 	</div>
 </div>
+<?php endif ?> 
 <!--Manage Books  -->
 <div class="span3">
 	<div class="widget widget-nopad">

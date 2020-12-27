@@ -57,7 +57,7 @@
 			if(isset($_POST['username']))
 			{
 				$username=$_POST['username'];
-				$result=select("password","staff","WHERE Email='$username'");
+				$result=select("password,Category","staff","WHERE Email='$username'");
 				$passcode=mysqli_fetch_array($result);
 				if(empty($passcode))
 				{
@@ -85,6 +85,7 @@
 							$_SESSION['sn']=$idd['Name'];
 							$_SESSION['sid']=$idd['sid'];
 							$_SESSION['username']=$idd['Email'];
+							$_SESSION['category']=$idd['Category'];
 							echo '<script>window.location="index.php?page=Dashboard"</script>'; 
 						}
 						else{$e=$p=3;}

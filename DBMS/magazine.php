@@ -61,14 +61,6 @@ title("Magazine");
           <div class="controls">
             <div class="input-append">           
               <input class="span2 m-wrap" id="appendedInputButton" type="text" name="mn" autocomplete="off" required="">
-            </div>
-          </div>  <!-- /controls -->      
-        </div>
-        <div class="control-group">     
-          <label class="control-label" for="radiobtns">Magazine Name</label>
-          <div class="controls">
-            <div class="input-append">           
-              <input class="span2 m-wrap" id="appendedInputButton" type="text" name="man" autocomplete="off">
               <br><br>
               <input class="btn" type="submit" name="op" value="Remove_Magazine">
             </div>
@@ -156,7 +148,7 @@ title("Magazine");
               {
                 res();
               }else
-              {$result=select("*","magazine","WHERE name LIKE '$mgn' ORDER BY id ASC LIMIT $cnt ");}
+              {$result=select("*","magazine","WHERE name LIKE '%$mgn%' ORDER BY id ASC LIMIT $cnt ");}
             }
             else
             {
