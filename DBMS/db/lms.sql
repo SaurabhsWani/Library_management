@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2020 at 10:31 AM
+-- Generation Time: Dec 28, 2020 at 06:06 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -33,16 +33,51 @@ CREATE TABLE `magazine` (
   `name` varchar(11) NOT NULL,
   `author` varchar(11) NOT NULL,
   `copyid` varchar(11) NOT NULL,
-  `dateadd` datetime NOT NULL DEFAULT current_timestamp()
+  `dateadd` datetime NOT NULL DEFAULT current_timestamp(),
+  `addedby` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `magazine`
 --
 
-INSERT INTO `magazine` (`id`, `name`, `author`, `copyid`, `dateadd`) VALUES
-(17, 'lucy', 'saurabh ', '17-1', '2020-12-26 00:00:00'),
-(18, 'Harry Porte', 'saurabh ', '18-1', '2020-12-26 00:00:00');
+INSERT INTO `magazine` (`id`, `name`, `author`, `copyid`, `dateadd`, `addedby`) VALUES
+(19, 'lucy', 'saurabh ', '19-1', '2020-12-27 00:00:00', ''),
+(41, 'lucy', 'Arnold', '19-2', '2020-12-27 10:55:20', ''),
+(47, 'lucy', 'Arnold', '19-3', '2020-12-27 10:57:19', ''),
+(51, 'lucy', 'Arnold', '19-4', '2020-12-27 11:08:57', ''),
+(53, 'Harry Porte', 'Arnold', '53-1', '2020-12-27 11:08:57', ''),
+(55, 'lucy', 'Arnold', '19-5', '2020-12-27 11:08:57', ''),
+(57, 'Harry Porte', 'Arnold', '53-2', '2020-12-27 11:08:57', ''),
+(61, 'Harry Porte', 'Arnold', '53-3', '2020-12-27 11:09:45', ''),
+(65, 'Harry Porte', 'Arnold', '53-4', '2020-12-27 11:10:40', ''),
+(67, 'ssss', 'Ram charan', '66-1', '2020-12-27 00:00:00', 'Saurabh s. Wani'),
+(69, 'Emma Watson', 'Harmoine', '69-1', '2020-12-28 10:31:03', ''),
+(70, 'Harry Porte', 'Arnold', '53-5', '2020-12-28 10:31:03', ''),
+(71, 'Jonas Marth', 'Arnold', '71-1', '2020-12-28 10:31:03', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `removeddata`
+--
+
+CREATE TABLE `removeddata` (
+  `id` int(11) NOT NULL,
+  `removedby` varchar(1000) NOT NULL,
+  `removedon` datetime NOT NULL DEFAULT current_timestamp(),
+  `removeditem` varchar(1000) NOT NULL,
+  `removedcount` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `removeddata`
+--
+
+INSERT INTO `removeddata` (`id`, `removedby`, `removedon`, `removeditem`, `removedcount`) VALUES
+(1, 'Saurabh s. Wani', '2020-12-27 12:52:05', 'Magazine-lucy', '2'),
+(2, 'Saurabh s. Wani', '2020-12-27 13:06:17', 'Student - P-1952013 E-Silvester@Rambo.com N-Silvester  M1100223344 Y-0000-00-00 B-Mechanical Engineering A-Near USA, Rambo nagar, Jalgaon', '1'),
+(3, 'Saurabh s. Wani', '2020-12-28 10:34:23', 'Magazine - lucy', '1');
 
 -- --------------------------------------------------------
 
@@ -59,15 +94,16 @@ CREATE TABLE `staff` (
   `image` varchar(256) NOT NULL,
   `Date` date NOT NULL,
   `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Login_ip` varchar(30) NOT NULL
+  `Login_ip` varchar(30) NOT NULL,
+  `Category` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`sid`, `Name`, `Email`, `password`, `branch`, `image`, `Date`, `last_login`, `Login_ip`) VALUES
-(1, 'Saurabh s. Wani', 'er.saurabhwani1@gmail.com', 'asdf', 'Computer', 'IMG20201107085744.jpg', '2020-12-05', '2020-12-24 09:06:57', '::1');
+INSERT INTO `staff` (`sid`, `Name`, `Email`, `password`, `branch`, `image`, `Date`, `last_login`, `Login_ip`, `Category`) VALUES
+(1, 'Saurabh s. Wani', 'er.saurabhwani1@gmail.com', 'asdf', 'Computer', 'student.png', '2020-12-05', '2020-12-28 05:00:13', '::1', 0);
 
 -- --------------------------------------------------------
 
@@ -896,7 +932,6 @@ INSERT INTO `student` (`stid`, `prn`, `Name`, `Email`, `mobile`, `branch`, `admi
 (803, '1588055', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule'),
 (804, '2031026', 'Arnold Sweznagger', 'Arnold@terminater.com', 1478965412, 'Electrical Engineering', '0000-00-00', '0', 'Male', 'Near USA, Terminator Park, Jalgaon'),
 (806, '1588056', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule'),
-(807, '1952013', 'Silvester ', 'Silvester@Rambo.com', 1100223344, 'Mechanical Engineering', '0000-00-00', '0', 'Male', 'Near USA, Rambo nagar, Jalgaon'),
 (808, '1952016', 'Emma Wattson', 'Harmoine@Harrypotter.com', 2541589965, 'Civil Engineering', '0000-00-00', '0', 'Female', 'Near Uk, Voldemort Street, Dhule');
 
 -- --------------------------------------------------------
@@ -944,6 +979,12 @@ ALTER TABLE `magazine`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `removeddata`
+--
+ALTER TABLE `removeddata`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `staff`
 --
 ALTER TABLE `staff`
@@ -971,7 +1012,13 @@ ALTER TABLE `student_book`
 -- AUTO_INCREMENT for table `magazine`
 --
 ALTER TABLE `magazine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `removeddata`
+--
+ALTER TABLE `removeddata`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `staff`

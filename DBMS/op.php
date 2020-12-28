@@ -113,10 +113,23 @@ if(isset($_POST['prn'])){
 //To remove student start
 				case 'Remove':
 				$prn = $_POST['prn124'];
+				$resultt=select("*","student","WHERE prn=$prn LIMIT 1");
+				$std=mysqli_fetch_assoc($resultt);
+				$item="Student - P-".$std['prn']." E-".$std['Email']." N-".$std['Name']." M".$std['mobile']." Y-".$std['admi_year']." B-".$std['branch']." A-".$std['Address'];
 				$add="DELETE FROM student WHERE prn=$prn";    
 				if ($connection->query($add)) 
 				{
+					$removedby = $_SESSION['sn'];
+					$n=1;
+					$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
+					if ($connection->query($add)) 
+					{						
 					poutput("Student removed successfully","student.php?page=Dashboard&prn=$prn&submit=");
+					}
+					else{
+						
+					poutput("Student removed successfully But Not Added in Removed Data","student.php?page=Dashboard&prn=$prn&submit=");
+					}
 				}
 				else
 				{
@@ -129,8 +142,8 @@ if(isset($_POST['prn'])){
 				$name = $_POST['name'];
 				$result=select("*","magazine","WHERE name LIKE '$name' ");
 				$row=mysqli_num_rows($result);
-				$result=select("id","magazine","WHERE name LIKE '$name' LIMIT 1");
-				$std=mysqli_fetch_assoc($result);
+				$resultt=select("id","magazine","WHERE name LIKE '$name' LIMIT 1");
+				$std=mysqli_fetch_assoc($resultt);
 				if($row!=0){
 					$copyid=$std['id']."-".($row+1);
 				}
@@ -144,7 +157,8 @@ if(isset($_POST['prn'])){
 				}
 				$author = $_POST['author'];
 				$date = $_POST['date'];
-				$add1="INSERT INTO magazine(name,author,dateadd,copyid) VALUES ('$name','$author','$date','$copyid')";
+				$addedby = $_SESSION['sn'];
+				$add1="INSERT INTO magazine(name,author,dateadd,copyid,addedby) VALUES ('$name','$author','$date','$copyid','$addedby')";
 				if ($connection->query($add1)) 
 				{
 					poutput("Magazine Data Added Successfully","Magazine.php?page=Dashboard");
@@ -158,7 +172,6 @@ if(isset($_POST['prn'])){
 //To Remove magazine Start
 				case 'Remove_Magazine':
 				$name = $_POST['mn'];
-				$man = $_POST['man'];
 				$result=select("*","magazine","WHERE name LIKE '$name'");
 				$row=mysqli_num_rows($result);
 				if($row!=0)
@@ -212,7 +225,16 @@ if(isset($_POST['prn'])){
 				$add="DELETE FROM magazine WHERE name LIKE '$name' ORDER BY id DESC LIMIT $n";
 				if ($connection->query($add)) 
 				{
-					poutput("Magazine removed successfully","magazine.php?page=Dashboard");
+					$removedby = $_SESSION['sn'];
+					$item="Magazine - ".$name;
+					$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
+					if ($connection->query($add)) 
+					{
+						poutput("Magazine removed successfully","magazine.php?page=Dashboard");
+					}
+					else{
+						poutput("Magazine removed successfully But Not Added to Removed Data","magazine.php?page=Dashboard");
+					}
 				}
 				else
 				{
