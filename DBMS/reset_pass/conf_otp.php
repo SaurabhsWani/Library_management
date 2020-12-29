@@ -5,7 +5,6 @@ include('header.php');
 ?>
 <form action="conf_otpc.php" method="post">
 	<center><h1>Reset Your Password</h1></center>
-	<?php echo $_SESSION['otp']; ?>
 	<div class="login-fields">
 		<p style="font-size: 14px;text-align: center;">Enter OTP Received on this <br /><b style="text-transform: uppercase;"><?php echo $_SESSION['email'];?></b> Mail</p>
 		<div class="field">

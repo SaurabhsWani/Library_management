@@ -107,14 +107,46 @@ if(isset($_GET['prn'])){
 							</div>
 							<div class="modal-body">
 								<form  action="op.php" method="post" class="form-horizontal" >
-									<div class="control-group">			
-										<label class="control-label" for="radiobtns">Book Name</label>
+									<div class="control-group">								
+										<label class="control-label">Select to Add</label>
+										<div class="controls">
+											<label class="checkbox inline">
+												<a href="javascript:void(0);" class="btn btn-info" onclick="formToggle();"><i class="plus"></i> Magzine / Book</a>
+											</label>
+										</div>	<!-- /controls -->			
+									</div>
+									<div id="book" class="control-group" style="display:none">
+										<label class="control-label" for="radiobtns"><b>Book</b> Name</label>
 										<div class="controls">
 											<div class="input-append">
-												<?php if($row!=0){ ?>								
+												<?php if($row!=0){ ?>						
 													<input type="hidden" name="prn" value="<?php echo($prn) ?>">
 												<?php } ?>
-												<input class="span2 m-wrap" id="appendedInputButton" type="text" name="book" autocomplete="off">
+													<datalist id="books">
+													<?php
+													$DB_Rowsb = select("*","books","ORDER BY bk_id");
+													while($rowb = mysqli_fetch_assoc($DB_Rowsb))echo("<option value = '" . $rowb['book_name'] . "'>" . $rowb['book_name'] . "</option>");
+													?>
+												</datalist>
+												<input type="text" name="book" class="span2 m-wrap" name="prn" autoComplete="off" list="books"/>
+												<input class="btn" type="submit" value="add" name="op">
+											</div>
+										</div>	<!-- /controls -->			
+									</div>
+									<div id="mag" class="control-group" style="display:none">
+										<label class="control-label" for="radiobtns"><b>Magzine</b> Name</label>
+										<div class="controls">
+											<div class="input-append">
+												<?php if($row!=0){ ?>						
+													<input type="hidden" name="prn" value="<?php echo($prn) ?>">
+												<?php } ?>
+													<datalist id="mags">
+													<?php
+													$DB_Rows = select("*","magazine","ORDER BY id");
+													while($row = mysqli_fetch_assoc($DB_Rows))echo("<option value = '" . $row['name'] . "'>" . $row['name'] . "</option>");
+													?>
+												</datalist>
+												<input type="text" name="magzine" class="span2 m-wrap" name="prn" autoComplete="off" list="mags"/>
 												<input class="btn" type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
@@ -132,7 +164,6 @@ if(isset($_GET['prn'])){
 								<!-- <th> Sr.No.</th> -->
 								<th><center> Book Name</center></th>
 								<th><center> Purchase date</center></th>
-								<th><center> Return Date</center></th>
 								<th><center> Renew Date</center></th>
 								<th><center> Days Left For <br>Return / Renew</center></th>
 								<th><center> Fine Rs.</center></th>
@@ -143,77 +174,90 @@ if(isset($_GET['prn'])){
 							<?php 
 							$result=select("*","student_book","WHERE prn=$prn ORDER BY took DESC");
 							$book_count=0;
+							$fine=null;
 							while($stb = mysqli_fetch_assoc($result))
 							{
 								echo "<tr><td><center>".$stb['book_name']."</center> </td>
 								<td> <center>".$stb['took']."</center></td>			
-								<td> <center>".$stb['returned']."</center></td>
 								<td> <center>".$stb['renew']."</center></td>
 								<td> <center>";
-								if($stb['returned']=='0000-00-00 00:00:00'&&$stb['renew']!='0000-00-00 00:00:00')
+								if($stb['renew']!='0000-00-00 00:00:00')
 								{
 									echo 15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D");
 								}
-								elseif($stb['returned']!='0000-00-00 00:00:00')
-								{}
-							elseif($stb['returned']=='0000-00-00 00:00:00'&&$stb['renew']=='0000-00-00 00:00:00'){
-								echo 15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D");
-							}else{}
-							echo"</cen
-							ter></td>";
-
-							if ((abs(diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']=='0000-00-00 00:00:00'&&$stb['returned']=='0000-00-00 00:00:00')
-							{
-								echo"<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>";
+								elseif($stb['renew']=='0000-00-00 00:00:00'){
+									echo 15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D");
+								}else{}
+								echo"</cen
+								ter></td>";
+								if ((abs(diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']=='0000-00-00 00:00:00')
+								{
+									$fine=abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5));
+									echo"<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>";
+								}
+								elseif ((abs(diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']!='0000-00-00 00:00:00')
+								{
+									$fine=abs(((15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))*5));
+									echo"<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>";
+								}
+								else
+								{
+									echo"<td> <center></center></td>";
+								}
+								echo"<td class='td-actions'>
+								<form action='op.php' method='post'>
+								<input type='hidden' name='prn' value='".$prn."'>
+								<input type='hidden' name='book' value='".$stb['book_name']."'>
+								";?>
+								<?php 
+								if ($fine!=null)
+								{
+									$book_count=$book_count+1;
+									echo"<button type='submit' title='Return' value='return' name='op' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";
+								}
+								elseif(($row!=0 && $status=="1") && ($stb['renew']!='0000-00-00 00:00:00'))
+								{
+									$book_count=$book_count+1;
+									echo"<button type='submit' title='Return' value='return' name='op' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";	
+								}
+								else
+								{
+									$book_count=$book_count+1;
+									echo"<button type='submit' title='Return' value='return' name='op' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";		
+									echo "
+									<button type='submit' title='Renew' value='Renew' name='op' class='btn btn-primary btn-small'><i class='btn-icon-only icon-large icon-repeat'></i></button>";
+								}
+								echo "</form>
+								</td></tr>"; 
 							}
-							elseif ((abs(diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))>15) && $stb['renew']!='0000-00-00 00:00:00'&&$stb['returned']=='0000-00-00 00:00:00')
+							if($book_count>=5)
 							{
-								echo"<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>";
+								echo "<script>alert('Don Not Allow Student To Take Book Already Have 5 Books');</script>";
 							}
-							else
-							{
-								echo"<td> <center></center></td>";
-							}
-							echo"<td class='td-actions'>
-							<form action='op.php' method='post'>
-							<input type='hidden' name='prn' value='".$prn."'>
-							<input type='hidden' name='book' value='".$stb['book_name']."'>
-							";?>
-							<?php 
-							if(($row!=0 && $status=="1") && ($stb['returned']!='0000-00-00 00:00:00'))
-							{}
-						elseif(($row!=0 && $status=="1") && ($stb['renew']!='0000-00-00 00:00:00' && $stb['returned']=='0000-00-00 00:00:00'))
-						{
-							$book_count=$book_count+1;
-							echo"<button type='submit' title='Return' value='return' name='op' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";	
-						}elseif (($row!=0 && $status!="1")) {
-							# code...
-						}
-						else
-						{
-							$book_count=$book_count+1;
-							echo"<button type='submit' title='Return' name='return' class='btn btn-small btn-success'><i class='btn-icon-only icon-ok'> </i></button>";		
-							echo "
-							<button type='submit' title='Renew' value='Renew' name='op' class='btn btn-primary btn-small'><i class='btn-icon-only icon-large icon-repeat'></i></button>";
-						}
-						echo "</form>
-						</td></tr>"; 
-					}
-					if($book_count>=5)
-					{
-						echo "<script>alert('Don Not Allow Student To Take Book Already Have 5 Books');</script>";
-					}
-					?>						
-				</tbody>
-			</table>
-		</div>
-		<?php 
-		$row=mysqli_num_rows($result);
-		if($row==0){show('Book Data Of PRN '.$prn.' ');}
-		?>
+							?>						
+						</tbody>
+					</table>
+				</div>
+				<?php 
+				$row=mysqli_num_rows($result);
+				if($row==0){show('Book Data Of PRN '.$prn.' ');}
+				?>
+			</div>
+		<?php }  ?>
 	</div>
-<?php }  ?>
-</div>
-<?php
-include('footer.php');
-?>
+	<script>
+		function formToggle(){
+			var b = document.getElementById('book');
+			var m = document.getElementById('mag');
+			if(b.style.display === "none"){
+				b.style.display = "block";
+				m.style.display = "none";
+			}else{
+				b.style.display = "none";
+				m.style.display = "block";
+			}
+		}
+	</script>
+	<?php
+	include('footer.php');
+	?>

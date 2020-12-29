@@ -25,7 +25,7 @@ title("Fine");
 				</thead>
 				<tbody>
 					<?php 
-					$result=select("*","student INNER JOIN student_book ON student.prn=student_book.prn","WHERE (student_book.returned='0000-00-00 00:00:00') ORDER BY student.prn");
+					$result=select("*","student INNER JOIN student_book ON student.prn=student_book.prn","ORDER BY student.prn");
 					while($stb = mysqli_fetch_assoc($result))
 					{
 						if($stb['renew']!='0000-00-00 00:00:00' && (diff_date($stb['renew'],date("Y-m-d H:i:s"),"D")>15)) 

@@ -40,11 +40,17 @@ title("Magazine");
           </div> <!-- /controls -->       
         </div>
         <div class="control-group">                     
-          <label class="control-label" for="date">Date</label>
+          <label class="control-label" for="isbn">ISBN</label>
           <div class="controls">
-            <input type="date" class="span3" id="date" value="" name="date">
-          </div> <!-- /controls --> 
-          <Button class="btn" type="submit" name="op" value="AddMZ">ADD</Button>     
+            <input type="text" class="span3" id="isbn" value="" name="isbn">
+          </div> <!-- /controls -->       
+        </div>
+        <div class="control-group">                     
+          <label class="control-label" for="ccount">Copies</label>
+          <div class="controls">
+            <input type="number" class="span3" id="ccount" value="" name="ccount">
+          </div> <!-- /controls -->       
+          <Button class="btn" type="submit" name="op" value="AddMZ">ADD</Button>    
         </div>
       </form>
     </div>
@@ -61,6 +67,13 @@ title("Magazine");
           <div class="controls">
             <div class="input-append">           
               <input class="span2 m-wrap" id="appendedInputButton" type="text" name="mn" autocomplete="off" required="">
+            </div>
+          </div>  <!-- /controls -->      
+        </div><div class="control-group">     
+          <label class="control-label" for="radiobtns">Magazine ISBN</label>
+          <div class="controls">
+            <div class="input-append">           
+              <input class="span2 m-wrap" id="appendedInputButton" type="text" name="isbn" autocomplete="off" required="">
               <br><br>
               <input class="btn" type="submit" name="op" value="Remove_Magazine">
             </div>
@@ -132,46 +145,58 @@ title("Magazine");
               <th><center>ID</center></th>
               <th><center>Magazine Name</center></th>
               <th><center>Author Name</center></th>
+              <th><center>ISBN</center></th>
               <th><center>Date Of Add</center></th>
-              <th><center>id-copy no</center></th>
+              <th><center>Available copies /<br> total copies</center></th>
             </tr>
           </thead>
           <tbody>
             <?php     
             function res(){$cnt=25;
-                $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");}       
-            if(isset($_GET['cnt']) && isset($_GET['mgn']))
-            {
-              $mgn = trim($_GET['mgn']);
-              $cnt = $_GET['cnt'];
-              if($mgn == null)
+              $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");}       
+              if(isset($_GET['cnt']) && isset($_GET['mgn']))
+              {
+                $mgn = trim($_GET['mgn']);
+                $cnt = $_GET['cnt'];
+                if($mgn == null)
+                {
+                  res();
+                }else
+                {$result=select("*","magazine","WHERE name LIKE '%$mgn%' ORDER BY id ASC LIMIT $cnt ");}
+              }
+              else
               {
                 res();
-              }else
-              {$result=select("*","magazine","WHERE name LIKE '%$mgn%' ORDER BY id ASC LIMIT $cnt ");}
-            }
-            else
-            {
-              res();
-            }
-            while($std=mysqli_fetch_assoc($result))
-            {
-              echo "<tr>
-              <td><center> ".$std['id']."</center></td>
-              <td><center> ".$std['name']."</center></td> 
-              <td><center> ".$std['author']."</center></td>  
-              <td><center> ".$std['dateadd']."</center></td>     
-              <td><center> ".$std['copyid']."</center></td>
-              </tr>";
-            }
-            ?>
-          </tbody>
-        </table>
+              }
+              while($std=mysqli_fetch_assoc($result))
+              {
+                $copyid=$av=0;
+                $i=$std['id'];
+                echo "<tr>
+                <td><center> ".$i."</center></td>
+                <td><center> ".$std['name']."</center></td> 
+                <td><center> ".$std['author']."</center></td>  
+                <td><center> ".$std['isbn']."</center></td>  
+                <td><center> ".$std['dateadd']."</center></td> ";
+                $resultt=select("*","magazinecopy","WHERE bookid = '$i'");
+                while($stdd=mysqli_fetch_assoc($resultt))
+                { 
+                  if ($stdd['status']==1) 
+                  {
+                  $av=$av+1;
+                  }
+                  $copyid=$copyid+1;
+                }    
+                echo "<td><center> ".$av."/".$copyid."</center></td></tr>";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
+      <!-- /widget-content --> 
     </div>
-    <!-- /widget-content --> 
   </div>
-</div>
-<?php
-include('footer.php');
-?>
+  <?php
+  include('footer.php');
+  ?>

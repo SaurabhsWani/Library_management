@@ -2,7 +2,7 @@
 <html lang="en">  
 <head>
 	<meta charset="utf-8">
-	<title>Login - Library Management System</title>
+	<title>Reset Password - Library Management System</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">     

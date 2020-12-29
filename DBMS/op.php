@@ -12,8 +12,8 @@ if(isset($_POST['prn'])){
 		{
 			$prn=$_GET['prn'];
 			if(update("student","status","'1'","WHERE prn='$prn'"))
-				{poutput("Registered Successfully","student.php?page=Dashboard");}
-			else{noutput("Unsuccessful To Registered","student.php?page=Dashboard");}
+				{poutput("Registered Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
+			else{noutput("Unsuccessful To Registered","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
 		}
 		else{
 			switch ($action) {
@@ -29,7 +29,8 @@ if(isset($_POST['prn'])){
 				}
 				break;
 				case 'return':
-				if(update("student_book","returned",'CURRENT_TIMESTAMP',"WHERE prn='$prn' AND book_name='$book' "))
+				$rem="DELETE FROM student_book WHERE book_name LIKE '$book' AND prn='$prn' ";
+				if ($connection->query($rem)) 
 				{
 					poutput("Book <b>Returned</b> Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 				}
@@ -124,11 +125,11 @@ if(isset($_POST['prn'])){
 					$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
 					if ($connection->query($add)) 
 					{						
-					poutput("Student removed successfully","student.php?page=Dashboard&prn=$prn&submit=");
+						poutput("Student removed successfully","student.php?page=Dashboard&prn=$prn&submit=");
 					}
 					else{
 						
-					poutput("Student removed successfully But Not Added in Removed Data","student.php?page=Dashboard&prn=$prn&submit=");
+						poutput("Student removed successfully But Not Added in Removed Data","student.php?page=Dashboard&prn=$prn&submit=");
 					}
 				}
 				else
@@ -140,47 +141,86 @@ if(isset($_POST['prn'])){
 //To add magazine start		
 				case 'AddMZ':
 				$name = $_POST['name'];
-				$result=select("*","magazine","WHERE name LIKE '$name' ");
+				$cc = $_POST['ccount'];
+				$author = $_POST['author'];
+				$isbn = $_POST['isbn'];
+				$addedby = $_SESSION['sn'];
+				$result=select("*","magazine","WHERE isbn='$isbn' LIMIT 1");
 				$row=mysqli_num_rows($result);
-				$resultt=select("id","magazine","WHERE name LIKE '$name' LIMIT 1");
-				$std=mysqli_fetch_assoc($resultt);
-				if($row!=0){
-					$copyid=$std['id']."-".($row+1);
-				}
-				else
+				if($row!=0)
 				{
-					$result=select("id","magazine","");
-					while($std=mysqli_fetch_assoc($result))
+					$r=mysqli_fetch_assoc($result);
+					$bid=$r['id'];
+					$cp=$y=0;
+					$resultt=select("*","magazinecopy","WHERE bookid = '$bid'");
+					while($std=mysqli_fetch_assoc($resultt)){$cp=$cp+1;}
+					for ($i=1; $i <=$cc; $i++) 
 					{
-						$copyid=($std['id']+1)."-1";
+						$copyid=$bid."-".($cp+$i);	
+						$addc="INSERT INTO magazinecopy(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
+						if ($connection->query($addc))
+						{
+							$y=$y+1;
+						}
+					}	
+					if ($y==$cc) 
+					{
+						poutput("Magazine Data Added Successfully1","Magazine.php?page=Dashboard");
+					}
+					else
+					{
+						noutput("Unsuccessful To Add Magazine1","Magazine.php?page=Dashboard");
 					}
 				}
-				$author = $_POST['author'];
-				$date = $_POST['date'];
-				$addedby = $_SESSION['sn'];
-				$add1="INSERT INTO magazine(name,author,dateadd,copyid,addedby) VALUES ('$name','$author','$date','$copyid','$addedby')";
-				if ($connection->query($add1)) 
-				{
-					poutput("Magazine Data Added Successfully","Magazine.php?page=Dashboard");
-				}
 				else
 				{
-					noutput("Unsuccessful To Add Magazine","Magazine.php?page=Dashboard");
+					$addm="INSERT INTO magazine(name,author,addedby,isbn) VALUES ('$name','$author','$addedby','$isbn')";
+					if ($connection->query($addm)) 
+					{
+						$bid= mysqli_insert_id($connection);
+						$y=0;
+						for ($i=1; $i <= $cc; $i++) 
+						{ 
+							$copyid=$bid."-".$i;
+							$addc="INSERT INTO magazinecopy(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
+							if ($connection->query($addc))
+							{
+								$y=$y+1;
+							}
+						}
+						if ($y==$cc)
+						{
+							poutput("Magazine Data Added Successfully","Magazine.php?page=Dashboard");
+						}
+						else
+						{
+							noutput("Unsuccessful To Add Magazine3","Magazine.php?page=Dashboard");
+						}
+					}
+					else
+					{
+						noutput("Unsuccessful To Add Magazine2","Magazine.php?page=Dashboard");
+					}
 				}
 				break;
 //To add magazine end
 //To Remove magazine Start
 				case 'Remove_Magazine':
 				$name = $_POST['mn'];
-				$result=select("*","magazine","WHERE name LIKE '$name'");
+				$isbn = $_POST['isbn'];
+				$result=select("*","magazine","WHERE name LIKE '$name' AND isbn='$isbn'");
 				$row=mysqli_num_rows($result);
 				if($row!=0)
 				{
+					$mid=mysqli_fetch_assoc($result);
+					$bkid=$mid['id'];
+					$n=$mid['name'];
+					$mgcp=select("*","magazinecopy","WHERE bookid='$bkid'");
 					$copyid=0;
-					while($std=mysqli_fetch_assoc($result))
+					$cp=mysqli_num_rows($mgcp);
+					while($std=mysqli_fetch_assoc($mgcp))
 					{
-						$copyid=$copyid+1;
-						$n=$std['name'];
+						if ($std['status']==1) {$copyid=$copyid+1;}
 					}
 					include("header.php");
 					echo '
@@ -188,7 +228,7 @@ if(isset($_POST['prn'])){
 					<div id="myModal2" class="modal hide  in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
 					<div class="modal-header">
 					<a href="magazine.php?page=Dashboard"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
-					<h3 id="myModalLabel">Remove Magazine '.$n.' having '.$row.' Copies </h3>
+					<h3 id="myModalLabel">Remove Magazine <u>'.$n.'</u> having <u>'.$copyid.'</u> copy in library outoff <u>'.$cp.'</u> Copies </h3>
 					</div>
 					<div class="modal-body">
 					<form  action="op.php" method="post" class="form-horizontal" >
@@ -196,9 +236,11 @@ if(isset($_POST['prn'])){
 					<label class="control-label" for="cp">Magazine Copies No to Delete</label>
 					<div class="controls">
 					<div class="input-append">   
+					<input type="hidden" value="'.$bkid.'" name="bkid">
 					<input type="hidden" value="'.$n.'" name="mn">
+					<input type="hidden" value="'.$copyid.'" name="cpno">
 					<select class="span2 m-wrap" id="cp" name="n">
-					<option value='.$row.'>All</option>
+					<option value='.$copyid.'>All</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -221,9 +263,11 @@ if(isset($_POST['prn'])){
 				break;
 				case 'Remove_MZ':
 				$n=$_POST['n'];
-				$name = $_POST['mn'];
-				$add="DELETE FROM magazine WHERE name LIKE '$name' ORDER BY id DESC LIMIT $n";
-				if ($connection->query($add)) 
+				$name=$_POST['mn'];
+				$cpno=$_POST['cpno'];
+				$bkid = $_POST['bkid'];
+				$add="DELETE FROM magazinecopy WHERE bookid LIKE '$bkid' AND status='1' ORDER BY sr DESC LIMIT $n";
+				if ($connection->query($add) && $cpno>0) 
 				{
 					$removedby = $_SESSION['sn'];
 					$item="Magazine - ".$name;
@@ -242,10 +286,62 @@ if(isset($_POST['prn'])){
 				}
 				break;
 //To Remove magazine end
-				default:
-				$_POST['op']="";
-				header('Location:index.php?page=Dashboard&prn=&submit=');
+				//for adding new book end
+				case 'AddBK':
+				$id = $_POST['id'];
+				$name = $_POST['name'];
+				$auth = $_POST['auth'];
+				$ttl = $_POST['ttl'];
+				$add = "INSERT INTO books(bk_id,book_name,auther,toatal_cp,cp_left) VALUES ('$id','$name','$auth','$ttl','$ttl')";    
+				if ($connection->query($add)) 
+				{
+					poutput("Data Added Successfully","books.php?page=Books");
+				}
+				else
+				{
+					noutput("Unsuccessful To Add Book","books.php?page=Books");
+				}
 				break;
+				//To remove book start
+				case 'rmBK':
+				$bid = $_POST['id1'];
+				//get the name and status of book with given id
+				$add="SELECT * FROM cp_book WHERE book_id='$bid'";
+				$result = $connection->query($add);
+				$std=mysqli_fetch_assoc($result);
+				$std1 = $std['book_name'];
+				$stat = $std['status'];
+				//delete the book
+				$add="DELETE FROM cp_books WHERE book_id='$bid'";    
+				if ($connection->query($add)) 
+				{	
+					//Update total books and books left in books table
+					$add = "SELECT * FROM books WHERE book_name='$std1'";
+					$result = $connection->query($add);
+					$std=mysqli_fetch_assoc($result);
+					//check if book was available i library
+					if (!$stat) {
+						$l = $std['cp_left'];
+					}
+					else{$l = $std['cp_left'] - 1;}
+					$t = $std['toatal_cp'] - 1;
+					$add="UPDATE books SET cp_left='$l',toatal_cp='$t' WHERE book_name='$std1'";			
+					if ($connection->query($add)){			
+						poutput("Book removed successfully","books.php?page=Books&prn=$prn&submit=");}
+						else{
+							poutput("Book removed successfully but unable to update data","books.php?page=Books&prn=$prn&submit=");
+						}
+						
+					}
+					else
+					{
+						noutput("Unsuccessful To Remove Data","books.php?page=Books&prn=$prn&submit=");
+					}
+					break;
+					default:
+					$_POST['op']="";
+					header('Location:index.php?page=Dashboard&prn=&submit=');
+					break;
+				}
 			}
-		}
-		?>
+			?>
