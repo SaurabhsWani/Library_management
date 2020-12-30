@@ -246,18 +246,17 @@ if(isset($_GET['prn'])){
 		<?php }  ?>
 	</div>
 	<script>
-		function formToggle(){
-			var b = document.getElementById('book');
-			var m = document.getElementById('mag');
-			if(b.style.display === "none"){
-				b.style.display = "block";
-				m.style.display = "none";
-			}else{
-				b.style.display = "none";
-				m.style.display = "block";
-			}
-		}
-	</script>
+    function formToggle(){
+      var b = document.getElementById('book');
+      var m = document.getElementById('mag');
+      if(b.style.display === "none"){
+        b.style.display = "block";
+        m.style.display = "none";
+      }else{
+        b.style.display = "none";
+        m.style.display = "block";
+      }
+    }</script>
 	<?php
 	include('footer.php');
 	?>

@@ -18,9 +18,9 @@ title("Profile");
 					<div class="tab-pane active" id="formcontrols">
 						<form action="op.php" method="post" enctype="multipart/form-data" class="form-horizontal">
 							<div class="control-group">									
-								<?php echo "<img src='images/".$idd['image']."' class='control-label span4' for='userimage' style='border-radius: 50%;display: inline-block;
+								<?php echo "<img alt='No Photo' src='images/".$idd['image']."' class='control-label span4' for='userimage' style='border-radius: 50%;display: inline-block;
 								width: 80px;
-								height: 80px;'>";?>								
+								height: 80px;' onerror=this.src='images/stff.png'>";?>								
 								<div class="controls">
 									<div class="input-append">
 										<input type="hidden" name="sid" value="<?php echo $_SESSION['sid'];?>">
