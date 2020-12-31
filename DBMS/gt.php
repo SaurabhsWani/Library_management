@@ -54,6 +54,7 @@ if(isset($_GET['prn'])){
 							<th><center> Mobile</center></th>
 							<th><center>Gender</center></th>
 							<th><center>Address</center></th>
+							<th><center>Image</center></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,6 +81,10 @@ if(isset($_GET['prn'])){
 								<td><center> ".$std['mobile']."</center></td>
 								<td><center> ".$std['Gender']."</center></td>
 								<td><center> ".$std['Address']."</center></td>
+								<td><center><img alt='No Photo' src='images/".$std['image']."' class='control-label span4' for='userimage' style='border-radius: 60%;display: inline-block;
+								width: 80px;
+								height: 80px;' onerror=this.src='images/stff.png'>
+								</center></td>
 								</tr>";
 								$status=$std['status'];
 								$prn=$std['prn'];
@@ -106,7 +111,7 @@ if(isset($_GET['prn'])){
 								<h3 id="myModalLabel">Add New Book</h3>
 							</div>
 							<div class="modal-body">
-								<form  action="op.php" method="post" class="form-horizontal" >
+								<form class="form-horizontal">
 									<div class="control-group">								
 										<label class="control-label">Select to Add</label>
 										<div class="controls">
@@ -115,6 +120,8 @@ if(isset($_GET['prn'])){
 											</label>
 										</div>	<!-- /controls -->			
 									</div>
+								</form>
+								<form  action="op.php" method="post" class="form-horizontal" >
 									<div id="book" class="control-group" style="display:none">
 										<label class="control-label" for="radiobtns"><b>Book</b> Name</label>
 										<div class="controls">
@@ -122,17 +129,20 @@ if(isset($_GET['prn'])){
 												<?php if($row!=0){ ?>						
 													<input type="hidden" name="prn" value="<?php echo($prn) ?>">
 												<?php } ?>
-													<datalist id="books">
+												<datalist id="books">
 													<?php
-													$DB_Rowsb = select("*","books","ORDER BY bk_id");
-													while($rowb = mysqli_fetch_assoc($DB_Rowsb))echo("<option value = '" . $rowb['book_name'] . "'>" . $rowb['book_name'] . "</option>");
+													$DB_Rowsb = select("*","book","ORDER BY id");
+													while($rowb = mysqli_fetch_assoc($DB_Rowsb))echo("<option value = '" . $rowb['name'] . "'>" . $rowb['name'] . "</option>");
 													?>
 												</datalist>
-												<input type="text" name="book" class="span2 m-wrap" name="prn" autoComplete="off" list="books"/>
+												<input type="hidden" name="cat" value="b">
+												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off" list="books"/>
 												<input class="btn" type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
 									</div>
+								</form>
+								<form  action="op.php" method="post" class="form-horizontal" >
 									<div id="mag" class="control-group" style="display:none">
 										<label class="control-label" for="radiobtns"><b>Magzine</b> Name</label>
 										<div class="controls">
@@ -140,13 +150,14 @@ if(isset($_GET['prn'])){
 												<?php if($row!=0){ ?>						
 													<input type="hidden" name="prn" value="<?php echo($prn) ?>">
 												<?php } ?>
-													<datalist id="mags">
+												<datalist id="mags">
 													<?php
 													$DB_Rows = select("*","magazine","ORDER BY id");
 													while($row = mysqli_fetch_assoc($DB_Rows))echo("<option value = '" . $row['name'] . "'>" . $row['name'] . "</option>");
 													?>
 												</datalist>
-												<input type="text" name="magzine" class="span2 m-wrap" name="prn" autoComplete="off" list="mags"/>
+												<input type="hidden" name="cat" value="m">
+												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off" list="mags"/>
 												<input class="btn" type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
@@ -207,6 +218,7 @@ if(isset($_GET['prn'])){
 								echo"<td class='td-actions'>
 								<form action='op.php' method='post'>
 								<input type='hidden' name='prn' value='".$prn."'>
+								<input type='hidden' name='cat' value='".$stb['category']."'>
 								<input type='hidden' name='book' value='".$stb['book_name']."'>
 								";?>
 								<?php 
@@ -246,17 +258,17 @@ if(isset($_GET['prn'])){
 		<?php }  ?>
 	</div>
 	<script>
-    function formToggle(){
-      var b = document.getElementById('book');
-      var m = document.getElementById('mag');
-      if(b.style.display === "none"){
-        b.style.display = "block";
-        m.style.display = "none";
-      }else{
-        b.style.display = "none";
-        m.style.display = "block";
-      }
-    }</script>
-	<?php
-	include('footer.php');
-	?>
+		function formToggle(){
+			var b = document.getElementById('book');
+			var m = document.getElementById('mag');
+			if(b.style.display === "none"){
+				b.style.display = "block";
+				m.style.display = "none";
+			}else{
+				b.style.display = "none";
+				m.style.display = "block";
+			}
+		}</script>
+		<?php
+		include('footer.php');
+		?>

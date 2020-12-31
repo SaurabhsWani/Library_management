@@ -29,10 +29,16 @@ if(isset($_POST['prn'])){
 				}
 				break;
 				case 'return':
+				$cat=$_POST['cat'];
+				if ($cat=='m') {$catt='Magzine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
 				$rem="DELETE FROM student_book WHERE book_name LIKE '$book' AND prn='$prn' ";
+				$ip=1;   
 				if ($connection->query($rem)) 
 				{
-					poutput("Book <b>Returned</b> Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
+					if(update($col,"status","'$ip'","WHERE status='0' LIMIT 1"))
+					{
+						poutput("$catt Return Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
+					}
 				}
 				else
 				{
@@ -42,10 +48,16 @@ if(isset($_POST['prn'])){
 //for return or renew end
 //for adding new book start
 				case 'add':
-				$add="INSERT INTO student_book(prn,book_name,took) VALUES ('$prn','$book',CURRENT_TIMESTAMP)";    
+				$cat=$_POST['cat'];
+				if ($cat=='m') {$catt='Magzine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
+				$add="INSERT INTO student_book(prn,book_name,took,category) VALUES ('$prn','$book',CURRENT_TIMESTAMP,'$cat')"; 
+				$ip=0;   
 				if ($connection->query($add)) 
 				{
-					poutput("Book Added Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
+					if(update($col,"status","'$ip'","WHERE status='1' LIMIT 1"))
+					{
+						poutput("$catt Added Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
+					}
 				}
 				else
 				{
@@ -140,41 +152,41 @@ if(isset($_POST['prn'])){
 //To remove student end
 //To add magazine start		
 				case 'AddMZ':
+				if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy';}
+				elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";}
 				$name = $_POST['name'];
 				$cc = $_POST['ccount'];
 				$author = $_POST['author'];
 				$isbn = $_POST['isbn'];
 				$addedby = $_SESSION['sn'];
-				$result=select("*","magazine","WHERE isbn='$isbn' LIMIT 1");
+				$result=select("*",$col,"WHERE isbn='$isbn' LIMIT 1");
 				$row=mysqli_num_rows($result);
 				if($row!=0)
 				{
 					$r=mysqli_fetch_assoc($result);
 					$bid=$r['id'];
 					$cp=$y=0;
-					$resultt=select("*","magazinecopy","WHERE bookid = '$bid'");
+					$resultt=select("*",$colc,"WHERE bookid = '$bid'");
 					while($std=mysqli_fetch_assoc($resultt)){$cp=$cp+1;}
 					for ($i=1; $i <=$cc; $i++) 
 					{
 						$copyid=$bid."-".($cp+$i);	
-						$addc="INSERT INTO magazinecopy(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
+						$addc="INSERT INTO $colc(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
 						if ($connection->query($addc))
-						{
-							$y=$y+1;
-						}
+							{$y=$y+1;}
 					}	
 					if ($y==$cc) 
 					{
-						poutput("Magazine Data Added Successfully1","Magazine.php?page=Dashboard");
+						poutput(" $col Data Added Successfully","$col.php?page=Dashboard");
 					}
 					else
 					{
-						noutput("Unsuccessful To Add Magazine1","Magazine.php?page=Dashboard");
+						noutput("Unsuccessful To Add $col","$col.php?page=Dashboard");
 					}
 				}
 				else
 				{
-					$addm="INSERT INTO magazine(name,author,addedby,isbn) VALUES ('$name','$author','$addedby','$isbn')";
+					$addm="INSERT INTO $col(name,author,addedby,isbn) VALUES ('$name','$author','$addedby','$isbn')";
 					if ($connection->query($addm)) 
 					{
 						$bid= mysqli_insert_id($connection);
@@ -182,40 +194,40 @@ if(isset($_POST['prn'])){
 						for ($i=1; $i <= $cc; $i++) 
 						{ 
 							$copyid=$bid."-".$i;
-							$addc="INSERT INTO magazinecopy(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
+							$addc="INSERT INTO $colc(bookid,copyid,status) VALUES ('$bid','$copyid',1)";
 							if ($connection->query($addc))
-							{
-								$y=$y+1;
-							}
+								{$y=$y+1;}
 						}
 						if ($y==$cc)
 						{
-							poutput("Magazine Data Added Successfully","Magazine.php?page=Dashboard");
+							poutput("$col Data Added Successfully","$col.php?page=Dashboard");
 						}
 						else
 						{
-							noutput("Unsuccessful To Add Magazine3","Magazine.php?page=Dashboard");
+							noutput("Unsuccessful To Add $col","$col.php?page=Dashboard");
 						}
 					}
 					else
 					{
-						noutput("Unsuccessful To Add Magazine2","Magazine.php?page=Dashboard");
+						noutput("Unsuccessful To Add $col","$col.php?page=Dashboard");
 					}
 				}
 				break;
 //To add magazine end
 //To Remove magazine Start
 				case 'Remove_Magazine':
+				if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy'; $cat='mg';}
+				elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";$cat='bk';}
 				$name = $_POST['mn'];
 				$isbn = $_POST['isbn'];
-				$result=select("*","magazine","WHERE name LIKE '$name' AND isbn='$isbn'");
+				$result=select("*",$col,"WHERE name LIKE '$name' AND isbn='$isbn'");
 				$row=mysqli_num_rows($result);
 				if($row!=0)
 				{
 					$mid=mysqli_fetch_assoc($result);
 					$bkid=$mid['id'];
 					$n=$mid['name'];
-					$mgcp=select("*","magazinecopy","WHERE bookid='$bkid'");
+					$mgcp=select("*",$colc,"WHERE bookid='$bkid'");
 					$copyid=0;
 					$cp=mysqli_num_rows($mgcp);
 					while($std=mysqli_fetch_assoc($mgcp))
@@ -237,6 +249,7 @@ if(isset($_POST['prn'])){
 					<div class="controls">
 					<div class="input-append">   
 					<input type="hidden" value="'.$bkid.'" name="bkid">
+					<input type="hidden" name="cat" value="'.$cat.'">
 					<input type="hidden" value="'.$n.'" name="mn">
 					<input type="hidden" value="'.$copyid.'" name="cpno">
 					<select class="span2 m-wrap" id="cp" name="n">
@@ -257,16 +270,18 @@ if(isset($_POST['prn'])){
 					include("footer.php");
 				}else
 				{
-					echo "<script>alert('No Magazine Found');
-					window.location='Magazine.php?page=Dashboard';</script>";
+					echo "<script>alert('No $col Found');
+					window.location='$col.php?page=Dashboard';</script>";
 				}
 				break;
-				case 'Remove_MZ':
+				case 'Remove_MZ':				
+				if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy';}
+				elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";}
 				$n=$_POST['n'];
 				$name=$_POST['mn'];
 				$cpno=$_POST['cpno'];
 				$bkid = $_POST['bkid'];
-				$add="DELETE FROM magazinecopy WHERE bookid LIKE '$bkid' AND status='1' ORDER BY sr DESC LIMIT $n";
+				$add="DELETE FROM $colc WHERE bookid LIKE '$bkid' AND status='1' ORDER BY sr DESC LIMIT $n";
 				if ($connection->query($add) && $cpno>0) 
 				{
 					$removedby = $_SESSION['sn'];
@@ -274,74 +289,69 @@ if(isset($_POST['prn'])){
 					$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
 					if ($connection->query($add)) 
 					{
-						poutput("Magazine removed successfully","magazine.php?page=Dashboard");
+						poutput("$col removed successfully","$col.php?page=Dashboard");
 					}
 					else{
-						poutput("Magazine removed successfully But Not Added to Removed Data","magazine.php?page=Dashboard");
+						poutput("$col removed successfully But Not Added to Removed Data","$col.php?page=Dashboard");
 					}
 				}
 				else
 				{
-					noutput("Unsuccessful To Remove Magazine","magazine.php?page=Dashboard");
+					noutput("Unsuccessful To Remove Magazine","$col.php?page=Dashboard");
 				}
 				break;
 //To Remove magazine end
-				//for adding new book end
-				case 'AddBK':
-				$id = $_POST['id'];
+				case 'AddSTF':
 				$name = $_POST['name'];
-				$auth = $_POST['auth'];
-				$ttl = $_POST['ttl'];
-				$add = "INSERT INTO books(bk_id,book_name,auther,toatal_cp,cp_left) VALUES ('$id','$name','$auth','$ttl','$ttl')";    
-				if ($connection->query($add)) 
+				$email = $_POST['email'];
+				$mobile = $_POST['mobile'];
+				$pass = $_POST['pass'];
+				$branch = $_POST['branch'];
+				$date = $_POST['date'];
+				$add1="INSERT INTO staff(Name,Email,mobile,password,branch,Date) VALUES ('$name','$email','$mobile','$pass','$branch','$date')";    
+				if ($connection->query($add1)) 
 				{
-					poutput("Data Added Successfully","books.php?page=Books");
+					poutput("Staff Data Added Successfully","staff.php?page=Dashboard&prn=$prn&submit=");
 				}
 				else
 				{
-					noutput("Unsuccessful To Add Book","books.php?page=Books");
+					noutput("Unsuccessful To Add Staff","staff.php?page=Dashboard&prn=$prn&submit=");
 				}
 				break;
-				//To remove book start
-				case 'rmBK':
-				$bid = $_POST['id1'];
-				//get the name and status of book with given id
-				$add="SELECT * FROM cp_book WHERE book_id='$bid'";
-				$result = $connection->query($add);
-				$std=mysqli_fetch_assoc($result);
-				$std1 = $std['book_name'];
-				$stat = $std['status'];
-				//delete the book
-				$add="DELETE FROM cp_books WHERE book_id='$bid'";    
+				//To remove staff start
+				case 'Remove Staff':
+				$stid = $_POST['stid'];
+				$stnm = $_POST['stnm'];
+				$add="DELETE FROM staff WHERE Email='$stid' AND Name='$stnm'";    
 				if ($connection->query($add)) 
-				{	
-					//Update total books and books left in books table
-					$add = "SELECT * FROM books WHERE book_name='$std1'";
-					$result = $connection->query($add);
-					$std=mysqli_fetch_assoc($result);
-					//check if book was available i library
-					if (!$stat) {
-						$l = $std['cp_left'];
-					}
-					else{$l = $std['cp_left'] - 1;}
-					$t = $std['toatal_cp'] - 1;
-					$add="UPDATE books SET cp_left='$l',toatal_cp='$t' WHERE book_name='$std1'";			
-					if ($connection->query($add)){			
-						poutput("Book removed successfully","books.php?page=Books&prn=$prn&submit=");}
-						else{
-							poutput("Book removed successfully but unable to update data","books.php?page=Books&prn=$prn&submit=");
-						}
-						
-					}
-					else
-					{
-						noutput("Unsuccessful To Remove Data","books.php?page=Books&prn=$prn&submit=");
-					}
-					break;
-					default:
-					$_POST['op']="";
-					header('Location:index.php?page=Dashboard&prn=&submit=');
-					break;
+				{
+
+					poutput("Staff removed successfully","staff.php?page=Dashboard&prn=$prn&submit=");
 				}
+				else
+				{
+					noutput("Unsuccessful To Remove Data","staff.php?page=Dashboard&prn=$prn&submit=");
+				}
+				break;
+				case 'mail':
+				$mail=$_POST['email'];
+				$fine=$_POST['fine'];
+				$bk=$_POST['bk'];
+				$dt=$_POST['dt'];
+				$headers='From:'.'SPAR-LMS '.'X-Mailer:PHP'.phpversion();
+				$subject="SPAR Library-Management-System";
+				$body="Informing About the Fine for The book\nInformation About Fine is given below:\nFine : ".$fine."\nBook : ".$bk."\nBook Taken on : ".$dt."\n You have to pay this fine for holding the book more than allowed days. To pay the fine come to library and pay fine. If you lost the book then you have to pay the price of the book. If you didn't come to pay then the legal action will be taken on you which may affect your academic activities.\n\n\nDo Not reply to this email";
+				if(mail($mail,$subject,$body,$headers))
+				{
+					echo "<script>alert('Email Send Succesfully');</script>";
+					echo '<script>window.location="fine.php?page=Dashboard"</script>';
+				}else{echo "<script>alert('Unsuccessful to Send Email');</script>";
+				echo '<script>window.location="fine.php?page=Dashboard"</script>';}
+				break;
+				default:
+				$_POST['op']="";
+				header('Location:index.php?page=Dashboard&prn=&submit=');
+				break;
 			}
-			?>
+		}
+		?>

@@ -30,30 +30,46 @@ title("Fine");
 					{
 						if($stb['renew']!='0000-00-00 00:00:00' && (diff_date($stb['renew'],date("Y-m-d H:i:s"),"D")>15)) 
 						{
+							$fine=abs(((15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))*5));
 							echo "<tr>
 							<td>".$stb['prn']."</td>
 							<td>".$stb['Name']."</td>
 							<td>".(diff_date($stb['admi_year'],date("Y-m-d H:i:s"),"Y")+1) ."</td>
 							<td>".$stb['book_name']."</td>
-							<td>".$stb['took']."</td>
-							<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>
+							<td>".$stb['renew']."</td>
+							<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>
 							<td>".$stb['mobile']."</td>
 							<td>".$stb['Email']."</td>
-							<td><button type='submit' title='MAIL' name='MAIL' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button></td></td>
+							<td><center>
+							<form action='op.php' method='POST'>
+							<input type='hidden' value='".$stb['Email']."' name='email'>
+							<input type='hidden' value='".$fine."' name='fine'>
+							<input type='hidden' value='".$stb['book_name']."' name='bk'>
+							<input type='hidden' value='".$stb['renew']."' name='dt'>
+							<button type='submit' title='MAIL' name='op' value='mail' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button><form></center>
+							</td>
 							</tr>";
 						}
 						elseif($stb['renew']=='0000-00-00 00:00:00' && (diff_date($stb['took'],date("Y-m-d H:i:s"),"D")>15)) 
 						{
+							$fine=abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5));
 							echo "<tr>
 							<td>".$stb['prn']."</td>
 							<td>".$stb['Name']."</td>
 							<td>".(diff_date($stb['admi_year'],date("Y-m-d H:i:s"),"Y")+1) ."</td>
 							<td>".$stb['book_name']."</td>
 							<td>".$stb['took']."</td>
-							<td style='color:white;background-color:#FF5722;'> <center>".abs(((15-diff_date($stb['took'],date("Y-m-d H:i:s"),"D"))*5))."</center></td>
+							<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>
 							<td>".$stb['mobile']."</td>
 							<td>".$stb['Email']."</td>
-							<td><button type='submit' title='MAIL' name='MAIL' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button></td>
+							<td><center>
+							<form action='op.php' method='POST'>
+							<input type='hidden' value='".$stb['Email']."' name='email'>
+							<input type='hidden' value='".$fine."' name='fine'>
+							<input type='hidden' value='".$stb['book_name']."' name='bk'>
+							<input type='hidden' value='".$stb['took']."' name='dt'>
+							<button type='submit' title='MAIL' name='op' value='mail' class='btn btn-primary'><i class='btn-icon-only icon-large icon-envelope'></i></button><form></center>
+							</td>
 							</tr>";
 						}
 						else{}
