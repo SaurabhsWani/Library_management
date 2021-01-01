@@ -212,21 +212,21 @@ if ($_SESSION['category']==0):?>
           </thead>
           <tbody>
             <?php
-            function res(){$cnt=25;
-              $result=select("*","staff","ORDER BY sid  LIMIT $cnt ");}       
+            $cnt=25;
+              $result=select("*","staff","ORDER BY sid  LIMIT $cnt ");       
               if(isset($_GET['cnt']) && isset($_GET['sn']))
               {
                 $sn = trim($_GET['sn']);
                 $cnt = $_GET['cnt'];
                 if($sn == null)
                 {
-                  res();
+                  $result=select("*","staff","ORDER BY sid  LIMIT $cnt ");
                 }else
                 {$result=select("*","staff","WHERE Name LIKE '%$sn%' ORDER BY sid ASC LIMIT $cnt ");}
               }
               else
               {
-                res();
+                $result=select("*","staff","ORDER BY sid  LIMIT $cnt ");
               }
               while($std=mysqli_fetch_assoc($result))
               {

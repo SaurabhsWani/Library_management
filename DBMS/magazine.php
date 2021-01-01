@@ -151,22 +151,22 @@ title("Magazine");
           </tr>
         </thead>
         <tbody>
-          <?php     
-          function res(){$cnt=25;
-            $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");}       
+          <?php  
+          $cnt=25;
+            $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");       
             if(isset($_GET['cnt']) && isset($_GET['mgn']))
             {
               $mgn = trim($_GET['mgn']);
               $cnt = $_GET['cnt'];
               if($mgn == null)
               {
-                res();
+                $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");
               }else
               {$result=select("*","magazine","WHERE name LIKE '%$mgn%' ORDER BY id ASC LIMIT $cnt ");}
             }
             else
             {
-              res();
+              $result=select("*","magazine","ORDER BY id  LIMIT $cnt ");
             }
             while($std=mysqli_fetch_assoc($result))
             {

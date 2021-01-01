@@ -122,8 +122,8 @@ title("Book");
     <div class="widget-header"><i class='icon-list'></i> 
       <h3>
         <?php
-        $result=select("*","book","WHERE 1");
-        $row=mysqli_num_rows($result);
+        $resul=select("*","book","WHERE 1");
+        $row=mysqli_num_rows($resul);
         if($row!=0){ ?>
           <form  action="Book.php" method="GET" >
             Book Name 
@@ -131,7 +131,7 @@ title("Book");
             Book ISBN 
             &emsp;<input class="span2 m-wrap" type="text" name="in" placeholder="Enter Book isbn to show">
             No of row 
-            &emsp;<input class="span2 m-wrap" type="number" required name="cnt" autocomplete="off" placeholder="Enter records number to show" value="10">
+            &emsp;<input class="span2 m-wrap" type="number" name="cnt" required="" autocomplete="off" placeholder="Enter records number to show" value="10">
             <input type="hidden" name="page" value="Dashboard">
             &emsp;<input type="submit" class="btn-primary" value="show">
           </form>
@@ -152,9 +152,9 @@ title("Book");
           </tr>
         </thead>
         <tbody>
-          <?php     
-          function res(){ $cnt=25;
-            $result=select("*","Book","ORDER BY id  LIMIT $cnt ");}
+          <?php
+           $cnt=25;
+            $result=select("*","Book","ORDER BY id  LIMIT $cnt ");
             if(isset($_GET['cnt']) && isset($_GET['mgn']))
             {
               $mgn = trim($_GET['mgn']);
@@ -166,7 +166,7 @@ title("Book");
                 {
                   if($in == null)
                   {
-                    res();
+                    $result=select("*","Book","ORDER BY id  LIMIT $cnt ");
                   }else
                   {
                     $result=select("*","Book","WHERE isbn='$in' ORDER BY id ASC LIMIT $cnt ");
@@ -179,7 +179,8 @@ title("Book");
               }
               else{$result=select("*","Book","WHERE name LIKE '%$mgn%' ORDER BY id ASC LIMIT $cnt ");}
             }
-            else{res();}
+            else{
+            $result=select("*","Book","ORDER BY id  LIMIT $cnt ");}
             $row=mysqli_num_rows($result);
             while($std=mysqli_fetch_assoc($result))
             {
