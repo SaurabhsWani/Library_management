@@ -30,12 +30,15 @@ if(isset($_POST['prn'])){
 				break;
 				case 'return':
 				$cat=$_POST['cat'];
-				if ($cat=='m') {$catt='Magzine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
+				if ($cat=='m') {$catt='Magazine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
 				$rem="DELETE FROM student_book WHERE book_name LIKE '$book' AND prn='$prn' ";
-				$ip=1;   
+				$ip=1;
 				if ($connection->query($rem)) 
 				{
-					if(update($col,"status","'$ip'","WHERE status='0' LIMIT 1"))
+					// if(update($col,"status","'$ip'","WHERE status='0' LIMIT 1"))
+					// {
+					$query="UPDATE $col SET status='$ip', prn='0' WHERE status='0' AND prn='$prn' LIMIT 1";
+					if (mysqli_query($connection,$query)) 
 					{
 						poutput("$catt Return Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 					}
@@ -49,12 +52,16 @@ if(isset($_POST['prn'])){
 //for adding new book start
 				case 'add':
 				$cat=$_POST['cat'];
-				if ($cat=='m') {$catt='Magzine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
+				if ($cat=='m') {$catt='Magazine';$col='magazinecopy';}else{$catt='Book';$col='bookcopy';}
 				$add="INSERT INTO student_book(prn,book_name,took,category) VALUES ('$prn','$book',CURRENT_TIMESTAMP,'$cat')"; 
 				$ip=0;   
+				$reult=select("*",$catt,"WHERE name='$book' LIMIT 1");
+				while($rod=mysqli_fetch_assoc($reult))$bokid=$rod['id'];
+				echo $bokid;
 				if ($connection->query($add)) 
 				{
-					if(update($col,"status","'$ip'","WHERE status='1' LIMIT 1"))
+					$query="UPDATE $col SET status='$ip',prn='$prn' WHERE status='1' AND bookid='$bokid' LIMIT 1";
+					if (mysqli_query($GLOBALS['connection'],$query)) 
 					{
 						poutput("$catt Added Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
 					}

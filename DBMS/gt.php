@@ -135,9 +135,10 @@ if(isset($_GET['prn'])){
 													while($rowb = mysqli_fetch_assoc($DB_Rowsb))echo("<option value = '" . $rowb['name'] . "'>" . $rowb['name'] . "</option>");
 													?>
 												</datalist>
+												<input type="hidden" name="prn" value="<?php echo $prn ?>" >
 												<input type="hidden" name="cat" value="b">
-												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off" list="books"/>
-												<input class="btn" type="submit" value="add" name="op">
+												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off"required list="books"/>
+												<input class="btn"  type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
 									</div>
@@ -156,8 +157,9 @@ if(isset($_GET['prn'])){
 													while($row = mysqli_fetch_assoc($DB_Rows))echo("<option value = '" . $row['name'] . "'>" . $row['name'] . "</option>");
 													?>
 												</datalist>
+												<input type="hidden" name="prn" value="<?php echo $prn ?>" >
 												<input type="hidden" name="cat" value="m">
-												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off" list="mags"/>
+												<input type="text" name="book" class="span2 m-wrap"  autoComplete="off" required list="mags"/>
 												<input class="btn" type="submit" value="add" name="op">
 											</div>
 										</div>	<!-- /controls -->			
