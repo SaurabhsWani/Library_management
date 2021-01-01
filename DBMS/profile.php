@@ -57,6 +57,12 @@ title("Profile");
 									<input type="text" disabled class="span4" id="LL" value="<?php echo $idd['last_login'];?>">
 								</div> <!-- /controls -->				
 							</div>
+							<div class="control-group">									
+								<label class="control-label" for="LLip">Last Login From this ip</label>
+								<div class="controls">
+									<input type="text" disabled class="span4" id="LLip" value="<?php echo $idd['Login_ip'];?>">
+								</div> <!-- /controls -->				
+							</div>
 							<button type="submit" name="op" value="updateprof" class="btn btn-primary">Save</button> 
 						</form>
 					</div>
