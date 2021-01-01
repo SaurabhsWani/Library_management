@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2020 at 10:01 AM
+-- Generation Time: Jan 01, 2021 at 06:50 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -42,12 +42,10 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `name`, `author`, `dateadd`, `addedby`, `isbn`) VALUES
-(1, 'lucy', 'saurabh ', '2020-12-31 12:30:42', 'Saurabh s. Wani', '81-88158-00-3'),
-(2, 'Saurabh Wan', 'saurabh ', '2020-12-31 12:46:37', 'Saurabh s. Wani', '11-11111-11-1'),
-(3, 'lucy', 'Arnold', '2020-12-31 13:07:10', 'Saurabh s. Wani', '11-11111-11-4'),
-(4, 'Emma Watson', 'Harmoine', '2020-12-31 13:07:10', 'Saurabh s. Wani', '11-11111-11-5'),
-(5, 'Harry Porte', 'Arnold', '2020-12-31 13:07:10', 'Saurabh s. Wani', '11-11111-11-6'),
-(6, 'Jonas Marth', 'Arnold', '2020-12-31 13:07:10', 'Saurabh s. Wani', '11-11111-11-7');
+(8, 'lucy', 'Arnold', '2020-12-31 19:23:43', 'Saurabh s. Wani', '11-11111-11-4'),
+(9, 'Emma Watson', 'Harmoine', '2020-12-31 19:23:43', 'Saurabh s. Wani', '11-11111-11-5'),
+(10, 'Harry Porte', 'Arnold', '2020-12-31 19:23:43', 'Saurabh s. Wani', '11-11111-11-6'),
+(11, 'Jonas Marth', 'Arnold', '2020-12-31 19:23:43', 'Saurabh s. Wani', '11-11111-11-7');
 
 -- --------------------------------------------------------
 
@@ -59,28 +57,23 @@ CREATE TABLE `bookcopy` (
   `sr` int(11) NOT NULL,
   `bookid` int(11) NOT NULL,
   `copyid` varchar(11) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `prn` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `bookcopy`
 --
 
-INSERT INTO `bookcopy` (`sr`, `bookid`, `copyid`, `status`) VALUES
-(25, 1, '1-1', 1),
-(26, 1, '1-2', 1),
-(27, 2, '2-1', 1),
-(29, 1, '1-3', 1),
-(30, 1, '1-4', 1),
-(31, 1, '1-5', 1),
-(35, 3, '3-1', 1),
-(36, 3, '3-2', 1),
-(37, 4, '4-1', 1),
-(38, 4, '4-2', 1),
-(39, 5, '5-1', 1),
-(40, 5, '5-2', 1),
-(41, 6, '6-1', 1),
-(42, 6, '6-2', 1);
+INSERT INTO `bookcopy` (`sr`, `bookid`, `copyid`, `status`, `prn`) VALUES
+(1, 8, '8-1', 0, 1841058),
+(2, 8, '8-2', 1, 0),
+(3, 9, '9-1', 0, 1841058),
+(4, 9, '9-2', 1, 0),
+(5, 10, '10-1', 1, 0),
+(6, 10, '10-2', 1, 0),
+(7, 11, '11-1', 1, 0),
+(8, 11, '11-2', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -102,16 +95,10 @@ CREATE TABLE `magazine` (
 --
 
 INSERT INTO `magazine` (`id`, `name`, `author`, `dateadd`, `addedby`, `isbn`) VALUES
-(19, 'lucy', 'saurabh ', '2020-12-27 00:00:00', '', '81-88158-00-2'),
-(79, 'Talk in Eng', 'Abdul Salam', '2020-12-29 11:06:34', 'Saurabh s. Wani', '81-88158-00-3'),
-(81, 'Saurabh Wan', 'saurabh ', '2020-12-29 15:56:16', 'Saurabh s. Wani', '11-11111-11-1'),
-(84, 'raj', 'Ram charan', '2020-12-29 16:01:50', 'Saurabh s. Wani', '11-11111-11-2'),
-(85, 'Saurabh Wan', 'saurabh wan', '2020-12-29 16:03:36', 'Saurabh s. Wani', '11-11111-11-3'),
-(86, 'ssss', 'saurabh wan', '2020-12-29 16:04:26', 'Saurabh s. Wani', '81-88158-00-4'),
-(88, 'lucy', 'Arnold', '2020-12-30 15:37:39', 'Saurabh s. Wani', '11-11111-11-4'),
-(89, 'Emma Watson', 'Harmoine', '2020-12-30 15:37:39', 'Saurabh s. Wani', '11-11111-11-5'),
-(90, 'Harry Porte', 'Arnold', '2020-12-30 15:37:39', 'Saurabh s. Wani', '11-11111-11-6'),
-(91, 'Jonas Marth', 'Arnold', '2020-12-30 15:37:39', 'Saurabh s. Wani', '11-11111-11-7');
+(93, 'lucy', 'Arnold', '2020-12-31 19:23:32', 'Saurabh s. Wani', '11-11111-11-4'),
+(94, 'Emma Watson', 'Harmoine', '2020-12-31 19:23:32', 'Saurabh s. Wani', '11-11111-11-5'),
+(95, 'Harry Porte', 'Arnold', '2020-12-31 19:23:32', 'Saurabh s. Wani', '11-11111-11-6'),
+(96, 'Jonas Marth', 'Arnold', '2020-12-31 19:23:32', 'Saurabh s. Wani', '11-11111-11-7');
 
 -- --------------------------------------------------------
 
@@ -123,49 +110,23 @@ CREATE TABLE `magazinecopy` (
   `sr` int(11) NOT NULL,
   `bookid` int(11) NOT NULL,
   `copyid` varchar(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1
+  `status` int(11) NOT NULL DEFAULT 1,
+  `prn` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `magazinecopy`
 --
 
-INSERT INTO `magazinecopy` (`sr`, `bookid`, `copyid`, `status`) VALUES
-(1, 19, '19-1', 1),
-(2, 19, '19-2', 1),
-(16, 19, '19-3', 1),
-(17, 19, '19-4', 1),
-(18, 19, '19-5', 1),
-(23, 79, '79-1', 1),
-(24, 79, '79-2', 1),
-(31, 81, '81-1', 1),
-(32, 81, '81-2', 1),
-(48, 84, '84-1', 1),
-(49, 84, '84-2', 1),
-(50, 84, '84-3', 1),
-(51, 84, '84-4', 1),
-(52, 84, '84-5', 1),
-(53, 85, '85-1', 1),
-(54, 85, '85-2', 1),
-(60, 86, '86-1', 1),
-(61, 86, '86-2', 1),
-(62, 88, '88-1', 1),
-(63, 88, '88-2', 1),
-(64, 89, '89-1', 1),
-(65, 89, '89-2', 1),
-(66, 90, '90-1', 1),
-(67, 90, '90-2', 1),
-(68, 91, '91-1', 1),
-(69, 91, '91-2', 1),
-(70, 88, '88-3', 1),
-(71, 88, '88-4', 1),
-(72, 89, '89-3', 1),
-(73, 89, '89-4', 1),
-(74, 90, '90-3', 1),
-(75, 90, '90-4', 1),
-(76, 91, '91-3', 1),
-(77, 91, '91-4', 1),
-(78, 19, '19-6', 1);
+INSERT INTO `magazinecopy` (`sr`, `bookid`, `copyid`, `status`, `prn`) VALUES
+(1, 93, '93-1', 0, 1841058),
+(2, 93, '93-2', 1, 0),
+(3, 94, '94-1', 1, 0),
+(4, 94, '94-2', 1, 0),
+(5, 95, '95-1', 0, 1841058),
+(6, 95, '95-2', 1, 0),
+(7, 96, '96-1', 1, 0),
+(8, 96, '96-2', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -181,23 +142,6 @@ CREATE TABLE `removeddata` (
   `removedcount` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `removeddata`
---
-
-INSERT INTO `removeddata` (`id`, `removedby`, `removedon`, `removeditem`, `removedcount`) VALUES
-(1, 'Saurabh s. Wani', '2020-12-27 12:52:05', 'Magazine-lucy', '2'),
-(2, 'Saurabh s. Wani', '2020-12-27 13:06:17', 'Student - P-1952013 E-Silvester@Rambo.com N-Silvester  M1100223344 Y-0000-00-00 B-Mechanical Engineering A-Near USA, Rambo nagar, Jalgaon', '1'),
-(3, 'Saurabh s. Wani', '2020-12-28 10:34:23', 'Magazine - lucy', '1'),
-(4, 'Saurabh s. Wani', '2020-12-29 10:27:15', 'Student - P-1841059 E-shubhamget@gmail.com N-Shubham Ramjivan Yadav  M8999585594 Y-2018-06-15 B-Computer Engineering A-Bajajnagar Aurangabad Maharashtra ', '1'),
-(5, 'Saurabh s. Wani', '2020-12-29 15:48:00', 'Magazine - lucy', '1'),
-(6, 'Saurabh s. Wani', '2020-12-29 15:49:38', 'Magazine - lucy', '0'),
-(7, 'Saurabh s. Wani', '2020-12-29 16:04:51', 'Magazine - ssss', '5'),
-(8, 'Saurabh s. Wani', '2020-12-30 14:26:38', 'Student - P-1952016 E-Harmoine@Harrypotter.com N-Emma Wattson M2541589965 Y-0000-00-00 B-Civil Engineering A-Near Uk, Voldemort Street, Dhule', '1'),
-(9, 'Saurabh s. Wani', '2020-12-31 13:02:22', 'Magazine - Saurabh Wan', '1'),
-(10, 'Saurabh s. Wani', '2020-12-31 13:02:41', 'Magazine - Saurabh Wan', '1'),
-(11, 'Saurabh s. Wani', '2020-12-31 13:03:08', 'Magazine - lucy', '2');
-
 -- --------------------------------------------------------
 
 --
@@ -212,7 +156,7 @@ CREATE TABLE `staff` (
   `password` varchar(256) NOT NULL,
   `branch` varchar(40) NOT NULL,
   `image` varchar(256) NOT NULL,
-  `Date` date NOT NULL,
+  `Date` date NOT NULL DEFAULT current_timestamp(),
   `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Login_ip` varchar(30) NOT NULL,
   `Category` int(11) NOT NULL DEFAULT 1
@@ -226,7 +170,8 @@ INSERT INTO `staff` (`sid`, `Name`, `mobile`, `Email`, `password`, `branch`, `im
 (1, 'Saurabh s. Wani', '1452587891', 'er.saurabhwani1@gmail.com', 'asdf', 'Computer Engineering', 'PicsArt_01-13-10.12.32.jpg', '2020-12-05', '2020-12-30 07:51:12', '::1', 0),
 (2, 'Prasad Joshi', '1452587842', 'prasadjoshi9969@gmail.com', '1234', 'Computer Engineering', 'prasad2.jpeg', '2020-12-01', '2020-12-30 03:59:10', '::1', 0),
 (3, 'Tony Stark', '4581236975', 'Tonystark@ironman.com', '1234', 'Electrical Engineering', '', '2020-12-01', '2020-12-30 03:59:22', '::1', 1),
-(5, 'Bruece Banner', '9654123658', 'BrueceBanner@Hulk.com', '1234', 'Instrumentation Engineering', '', '2020-12-03', '2020-12-30 03:59:36', '', 1);
+(5, 'Bruece Banner', '9654123658', 'BrueceBanner@Hulk.com', '1234', 'Instrumentation Engineering', '', '2020-12-03', '2020-12-30 03:59:36', '', 1),
+(9, 'Hannah', '1234567890', 'hannah@hannah.com', 'asdf', 'Computer Engineering', '', '2021-01-01', '2021-01-01 05:32:42', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1080,11 +1025,10 @@ CREATE TABLE `student_book` (
 --
 
 INSERT INTO `student_book` (`sr_no`, `prn`, `book_name`, `took`, `renew`, `fine`, `category`) VALUES
-(10, '1841023', 'prasad joshi', '2020-12-07 19:16:18', '2020-12-05 00:00:00', 0, ''),
-(15, '1841023', 'jjjjj', '2020-11-20 15:55:02', '0000-00-00 00:00:00', 0, ''),
-(16, '1841023', 'jalgaon', '2020-12-11 11:22:19', '2020-12-22 11:58:27', 0, ''),
-(17, '1841023', 'ppp', '2020-12-22 11:20:27', '2020-12-22 11:56:30', 0, ''),
-(18, '1841023', 'sss', '2020-12-22 11:22:28', '2020-12-22 11:26:49', 0, '');
+(1, '1841058', 'lucy', '2020-12-31 19:23:58', '0000-00-00 00:00:00', 0, 'b'),
+(2, '1841058', 'Emma Watson', '2020-12-31 19:24:14', '0000-00-00 00:00:00', 0, 'b'),
+(4, '1841058', 'lucy', '2020-12-31 19:26:10', '0000-00-00 00:00:00', 0, 'm'),
+(5, '1841058', 'Harry Porte', '2020-12-31 19:26:23', '0000-00-00 00:00:00', 0, 'm');
 
 --
 -- Indexes for dumped tables
@@ -1156,37 +1100,37 @@ ALTER TABLE `student_book`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `bookcopy`
 --
 ALTER TABLE `bookcopy`
-  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `magazine`
 --
 ALTER TABLE `magazine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `magazinecopy`
 --
 ALTER TABLE `magazinecopy`
-  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `removeddata`
 --
 ALTER TABLE `removeddata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `sid` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `sid` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -1198,7 +1142,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `student_book`
 --
 ALTER TABLE `student_book`
-  MODIFY `sr_no` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `sr_no` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
