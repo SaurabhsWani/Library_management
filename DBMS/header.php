@@ -1,4 +1,4 @@
-<?php include_once('security.php');include_once('fun.php');
+<?php include('security.php');include('fun.php');
 securityforpage();?>
 <!DOCTYPE html>
 <html lang="en">

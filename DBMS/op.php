@@ -1,7 +1,13 @@
 <?php
 //for return or renew start
 $time=date("Y-m-d H:i:s");
-include('security.php');include('fun.php');
+include("header.php");
+function loadder()
+{
+	echo "<div class='modal-backdrop'>
+	<image src='images/l5.gif' style='position: fixed;bottom: 0;left: 0;height: 110%;width:100%; z-index: -1;'/>";
+}
+loadder();
 securityforpage();
 $action=null;
 if(isset($_POST['prn']))
@@ -18,6 +24,7 @@ if (isset($_POST['op']))
 }
 if(isset($_GET['prn']))
 {
+	loadder();
 	$prn=$_GET['prn'];
 	if(update("student","status","'1'","WHERE prn='$prn'"))
 		{poutput("Registered Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");}
@@ -31,6 +38,7 @@ else
 	{
 //for return or renew start
 		case 'Renew':
+		loadder();
 		if(update("student_book","renew",'CURRENT_TIMESTAMP',"WHERE prn='$prn' AND book_name='$book' "))
 		{
 			poutput("Book <b>Renewed</b> Successfully","gt.php?page=IMPORT-EXPORT&prn=$prn&submit=");
@@ -41,6 +49,7 @@ else
 		}
 		break;
 		case 'return':
+		loadder();
 		$cat=$_POST['cat'];
 		if ($cat=='m') {$catt='Magazine';$col='magazinecopy';}
 		else{$catt='Book';$col='bookcopy';}
@@ -62,6 +71,7 @@ else
 //for return or renew end
 //for adding new book start
 		case 'add':
+		loadder();
 		$cat=$_POST['cat'];
 		if ($cat=='m') {$catt='Magazine';$col='magazinecopy';}
 		else{$catt='Book';$col='bookcopy';}
@@ -84,6 +94,7 @@ else
 		break;
 //for adding new book end
 		case 'AddST':
+		loadder();
 		$name = $_POST['name'];
 		$prn = $_POST['prn'];
 		$email = $_POST['email'];
@@ -113,6 +124,7 @@ else
 		break;
 //for updating profile start
 		case 'updateprof':
+		loadder();
 		$name=$_POST['name'];
 		$email=$_POST['email'];
 		$sid=$_POST['sid'];
@@ -152,6 +164,7 @@ else
 //for uploading image end
 //To remove student start
 		case 'Remove':
+		loadder();
 		$prn = $_POST['prn124'];
 		$resultt=select("*","student","WHERE prn=$prn LIMIT 1");
 		$std=mysqli_fetch_assoc($resultt);
@@ -180,6 +193,7 @@ else
 //To remove student end
 //To add magazine start		
 		case 'AddMZ':
+		loadder();
 		if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy';}
 		elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";}
 		$name = $_POST['name'];
@@ -262,9 +276,7 @@ else
 			{
 				if ($std['status']==1) {$copyid=$copyid+1;}
 			}
-			include("header.php");
 			echo '
-			<div class=" modal-backdrop">
 			<div id="myModal2" class="modal hide  in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
 			<div class="modal-header">
 			<a href="magazine.php?page=Dashboard"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
@@ -293,16 +305,15 @@ else
 			</div>
 			</form>
 			</div>
-			</div>
 			</div>';
-			include("footer.php");
 		}else
 		{
 			echo "<script>alert('No $col Found');
 			window.location='$col.php?page=Dashboard';</script>";
 		}
 		break;
-		case 'Remove_MZ':				
+		case 'Remove_MZ':
+		loadder();				
 		if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy';}
 		elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";}
 		$n=$_POST['n'];
@@ -330,6 +341,7 @@ else
 		break;
 //To Remove magazine end
 		case 'AddSTF':
+		loadder();
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$mobile = $_POST['mobile'];
@@ -362,6 +374,7 @@ else
 		}
 		break;
 		case 'mail':
+		loadder();
 		$mail=$_POST['email'];
 		$fine=$_POST['fine'];
 		$bk=$_POST['bk'];
@@ -382,8 +395,11 @@ else
 		break;
 		default:
 		$_POST['op']="";
+		loadder();
 		poutput("Welcome To SPAR-Library Management System","$url");
 		break;
 	}
 }
+echo "</div>";
+include("footer.php");
 ?>
