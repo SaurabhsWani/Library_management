@@ -14,9 +14,10 @@ title("Fine");
 				<thead>
 					<tr>
 						<th><center>Prn</center></th>
-						<th><center>Name</center></th>
+						<th><center>Student Name</center></th>
 						<th><center>Year</center></th>
-						<th><center>Book</center></th>
+						<th><center>Category</center></th>
+						<th><center>Name</center></th>
 						<th><center>Date of Purchase</center></th>
 						<th><center>Fine Rs</center></th>
 						<th><center>Contact</center></th>
@@ -30,6 +31,8 @@ title("Fine");
 					$result=select("*","student INNER JOIN student_book ON student.prn=student_book.prn","ORDER BY student.prn");
 					while($stb = mysqli_fetch_assoc($result))
 					{
+						if ($stb['category']=='m'){$cmb='Magzine';}
+								else{$cmb='Book';}
 						if($stb['renew']!='0000-00-00 00:00:00' && (diff_date($stb['renew'],date("Y-m-d H:i:s"),"D")>15)) 
 						{
 							$fine=abs(((15-diff_date($stb['renew'],date("Y-m-d H:i:s"),"D"))*5));
@@ -37,6 +40,7 @@ title("Fine");
 							<td>".$stb['prn']."</td>
 							<td>".$stb['Name']."</td>
 							<td>".(diff_date($stb['admi_year'],date("Y-m-d H:i:s"),"Y")+1) ."</td>
+							<td>".$cmb."</td>
 							<td>".$stb['book_name']."</td>
 							<td>".$stb['renew']."</td>
 							<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>
@@ -67,6 +71,7 @@ title("Fine");
 							<td>".$stb['prn']."</td>
 							<td>".$stb['Name']."</td>
 							<td>".(diff_date($stb['admi_year'],date("Y-m-d H:i:s"),"Y")+1) ."</td>
+							<td>".$cmb."</td>
 							<td>".$stb['book_name']."</td>
 							<td>".$stb['took']."</td>
 							<td style='color:white;background-color:#FF5722;'> <center>".$fine."</center></td>

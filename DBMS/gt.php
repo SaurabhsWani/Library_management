@@ -175,7 +175,8 @@ if(isset($_GET['prn'])){
 						<thead>
 							<tr>
 								<!-- <th> Sr.No.</th> -->
-								<th><center> Book Name</center></th>
+								<th><center> Book/Magzine</center></th>
+								<th><center> Name</center></th>
 								<th><center> Purchase date</center></th>
 								<th><center> Renew Date</center></th>
 								<th><center> Days Left For <br>Return / Renew</center></th>
@@ -190,7 +191,11 @@ if(isset($_GET['prn'])){
 							$fine=null;
 							while($stb = mysqli_fetch_assoc($result))
 							{
-								echo "<tr><td><center>".$stb['book_name']."</center> </td>
+								if ($stb['category']=='m'){$cmb='Magzine';}
+								else{$cmb='Book';}								
+								echo "<tr>
+								<td><center>".$cmb."</center> </td>
+								<td><center>".$stb['book_name']."</center> </td>
 								<td> <center>".$stb['took']."</center></td>			
 								<td> <center>".$stb['renew']."</center></td>
 								<td> <center>";
@@ -215,7 +220,7 @@ if(isset($_GET['prn'])){
 								}
 								else
 								{
-									echo"<td> <center></center></td>";
+									echo"<td> <center>0</center></td>";
 								}
 								echo"<td class='td-actions'>
 								<form action='op.php' method='post'>
