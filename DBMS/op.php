@@ -7,7 +7,6 @@ function loadder()
 	echo "<div class='modal-backdrop'>
 	<image src='images/l5.gif' style='position: fixed;bottom: 0;left: 0;height: 110%;width:100%; z-index: -1;'/>";
 }
-loadder();
 securityforpage();
 $action=null;
 if(isset($_POST['prn']))
@@ -384,12 +383,10 @@ else
 		$body="Informing About the Fine for The book\nInformation About Fine is given below:\nFine : ".$fine."\nBook : ".$bk."\nBook Taken on : ".$dt."\n You have to pay this fine for holding the book more than allowed days. To pay the fine come to library and pay fine. If you lost the book then you have to pay the price of the book. If you didn't come to pay then the legal action will be taken on you which may affect your academic activities.\n\n\nDo Not reply to this email";
 		if(mail($mail,$subject,$body,$headers))
 		{
-			echo "<script>alert('Email Send Succesfully');</script>";
 			poutput("Email Send Succesfully","fine.php?page=Dashboard");
 		}
 		else
 		{
-			echo "<script>alert('Unsuccessful to Send Email');</script>";
 			noutput("Unsuccesful to send Email","fine.php?page=Dashboard");
 		}
 		break;

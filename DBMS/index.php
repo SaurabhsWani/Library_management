@@ -60,7 +60,7 @@ title("Dashboard");
 				<h3> Manage Staff</h3>
 			</div>
 			<!-- /widget-header -->
-			<a href="staff.php?page=Dashboard" >
+			<a href="staff.php?page=Dashboard&cnt=" >
 				<div class="widget-content" style="background: #6D6F6A;">
 					<div class="widget big-stats-container">
 						<div class="widget-content" style="background: #6D6F6A;">
@@ -82,7 +82,7 @@ title("Dashboard");
 			<h3> Manage Books</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="book.php?page=Dashboard">
+		<a href="book.php?page=Dashboard&cnt=">
 			<div class="widget-content" style="background: #6D6F6A;">
 				<div class="widget big-stats-container">
 					<div class="widget-content" style="background: #6D6F6A;">
@@ -102,7 +102,7 @@ title("Dashboard");
 			<h3> Manage Magazines</h3>
 		</div>
 		<!-- /widget-header -->
-		<a href="Magazine.php?page=Dashboard">
+		<a href="Magazine.php?page=Dashboard&cnt=">
 			<div class="widget-content" style="background: #6D6F6A;">
 				<div class="widget big-stats-container">
 					<div class="widget-content" style="background: #6D6F6A;">
