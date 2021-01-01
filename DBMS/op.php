@@ -35,8 +35,6 @@ if(isset($_POST['prn'])){
 				$ip=1;
 				if ($connection->query($rem)) 
 				{
-					// if(update($col,"status","'$ip'","WHERE status='0' LIMIT 1"))
-					// {
 					$query="UPDATE $col SET status='$ip', prn='0' WHERE status='0' AND prn='$prn' LIMIT 1";
 					if (mysqli_query($connection,$query)) 
 					{
@@ -57,7 +55,6 @@ if(isset($_POST['prn'])){
 				$ip=0;   
 				$reult=select("*",$catt,"WHERE name='$book' LIMIT 1");
 				while($rod=mysqli_fetch_assoc($reult))$bokid=$rod['id'];
-				echo $bokid;
 				if ($connection->query($add)) 
 				{
 					$query="UPDATE $col SET status='$ip',prn='$prn' WHERE status='1' AND bookid='$bokid' LIMIT 1";
@@ -81,14 +78,23 @@ if(isset($_POST['prn'])){
 				$date = $_POST['date'];
 				$gender = $_POST['gender'];
 				$address = $_POST['address'];
-				$add1="INSERT INTO student(prn,name,email,mobile,branch,admi_year,Gender,Address) VALUES ('$prn','$name','$email','$mobile','$branch','$date','$gender','$address')";    
-				if ($connection->query($add1)) 
+				$result=select("*","student","WHERE prn='$prn' LIMIT 1");
+				$row=mysqli_num_rows($result);
+				if($row==0)
 				{
-					poutput("Student Data Added Successfully","student.php?page=Dashboard&prn=$prn&submit=");
+					$add1="INSERT INTO student(prn,name,email,mobile,branch,admi_year,Gender,Address) VALUES ('$prn','$name','$email','$mobile','$branch','$date','$gender','$address')";    
+					if ($connection->query($add1)) 
+					{
+						poutput("Student Data Added Successfully","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
+					}
+					else
+					{
+						noutput("Unsuccessful To Add Student","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
+					}
 				}
 				else
 				{
-					noutput("Unsuccessful To Add Student","student.php?page=Dashboard&prn=$prn&submit=");
+					noutput("Student Already Added","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
 				}
 				break;
 //for updating profile start
@@ -144,16 +150,16 @@ if(isset($_POST['prn'])){
 					$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
 					if ($connection->query($add)) 
 					{						
-						poutput("Student removed successfully","student.php?page=Dashboard&prn=$prn&submit=");
+						poutput("Student removed successfully","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
 					}
 					else{
 						
-						poutput("Student removed successfully But Not Added in Removed Data","student.php?page=Dashboard&prn=$prn&submit=");
+						poutput("Student removed successfully But Not Added in Removed Data","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
 					}
 				}
 				else
 				{
-					noutput("Unsuccessful To Remove Data","student.php?page=Dashboard&prn=$prn&submit=");
+					noutput("Unsuccessful To Remove Data","student.php?&cnt=&page=Dashboard&prn=$prn&submit=");
 				}
 				break;
 //To remove student end

@@ -191,16 +191,16 @@ elseif(isset($_POST['importStaff'])){
             fclose($csvFile);
             if(($c-$ui)==0)
             {
-                echo "success";
-                //poutput("Staff Data Imported Successfully","staff.php?page=Dashboard");
+                //echo "success";
+                poutput("Staff Data Imported Successfully","staff.php?page=Dashboard");
             }
             elseif (($c-$ui)>0 || $f>0) {
-                echo "fail1";
-                //noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
+                //echo "fail1";
+                noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
             }
             else{
-                echo "fail2";
-                //noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
+                //echo "fail2";
+                noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
             }            
         }
         else{
