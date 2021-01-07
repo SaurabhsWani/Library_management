@@ -258,7 +258,7 @@ title("Student");
             <td><center> ".$std['Address']."</center></td>
             <td><center><img alt='No Photo' src='images/".$std['image']."' class='control-label span4' for='userimage' style='border-radius: 60%;display: inline-block;
             width: 80px;
-            height: 80px;' onerror=this.src='images/stff.png'>
+            height: 80px;' onerror=this.src='images/ur.png'>
             </center></td>
             </tr>";
           }

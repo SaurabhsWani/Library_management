@@ -256,7 +256,7 @@ else
 		break;
 //To add magazine end
 //To Remove magazine Start
-		case 'Remove_Magazine':
+		case 'Remove_':
 		if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy'; $cat='mg';}
 		elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";$cat='bk';}
 		$name = $_POST['mn'];
@@ -279,7 +279,7 @@ else
 			<div id="myModal2" class="modal hide  in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
 			<div class="modal-header">
 			<a href="magazine.php?page=Dashboard"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></a>
-			<h3 id="myModalLabel">Remove Magazine <u>'.$n.'</u> having <u>'.$copyid.'</u> copy in library outoff <u>'.$cp.'</u> Copies </h3>
+			<h3 id="myModalLabel">Remove '.$col.' <u>'.$n.'</u> having <u>'.$copyid.'</u> copy in library outoff <u>'.$cp.'</u> Copies </h3>
 			</div>
 			<div class="modal-body">
 			<form  action="op.php" method="post" class="form-horizontal" >
@@ -298,7 +298,7 @@ else
 			<option value="3">3</option>
 			</select>        
 			<br><br>
-			<input class="btn" type="submit" name="op" value="Remove_MZ">
+			<input class="btn" type="submit" name="op" value="Remove__">
 			</div>
 			</div>  <!-- /controls -->      
 			</div>
@@ -311,7 +311,7 @@ else
 			window.location='$col.php?page=Dashboard';</script>";
 		}
 		break;
-		case 'Remove_MZ':
+		case 'Remove__':
 		loadder();				
 		if ($_POST['cat']=='mg'){$col='magazine';$colc='magazinecopy';}
 		elseif($_POST['cat']=='bk'){$col="book";$colc="bookcopy";}
@@ -323,7 +323,7 @@ else
 		if ($connection->query($add) && $cpno>0) 
 		{
 			$removedby = $_SESSION['sn'];
-			$item="Magazine - ".$name;
+			$item=$col." - ".$name;
 			$add="INSERT INTO removeddata(removedby,removeditem,removedcount) VALUES ('$removedby','$item','$n')";
 			if ($connection->query($add)) 
 			{

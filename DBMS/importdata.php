@@ -60,10 +60,10 @@ if(isset($_POST['importSubmit'])){
             }            
         }
         else{
-            echo "Error";
+            noutput("Error","student.php?page=Dashboard");
         }
     }else{
-        echo "Invalid file";
+        noutput("Error file type not match","student.php?page=Dashboard");
     }
 }
 elseif(isset($_POST['importSubmitMZ'])){
@@ -144,11 +144,11 @@ elseif(isset($_POST['importSubmitMZ'])){
             }          
         }
         else{
-            echo "Error";
+            noutput("Error","student.php?page=Dashboard");
         }
     }else{
-        echo "Invalid file";
-    }
+     noutput("Error file type not match","student.php?page=Dashboard");
+ }
 }
 elseif(isset($_POST['importStaff'])){
     // Allowed mime types
@@ -174,39 +174,42 @@ elseif(isset($_POST['importStaff'])){
                 $mobile = $line[1];
                 // Check whether student already exists in the database
                 $prevResult = select("Email","staff","WHERE Email = '$Email'");
-                if($prevResult->num_rows > 0){
+                if($prevResult->num_rows > 0)
+                {
                     // Update student data in the database
-                    if($connection->query("UPDATE staff SET Name = '$Name', Email = '$Email', pass = '$pass', branch = '$branch',mobile = '$mobile' WHERE Email = '$Email'")){$ui=$ui+1; echo "s1";}
+                    if($connection->query("UPDATE staff SET Name = '$Name', Email = '$Email', password = '$pass', branch = '$branch',mobile = '$mobile' WHERE Email = '$Email'")){$ui=$ui+1;}
                     else
-                        {$f=$f+1; echo "f1";} echo "s2";
-                }else{ echo "f2";
+                        {$f=$f+1;}
+
+                }else
+                {
                     // Insert member data in the database
-                    if($connection->query("INSERT INTO staff(Name,Email,password,branch,mobile) VALUES ('$Name','$Email','$pass','$branch','$mobile')"))
-                        {$ui=$ui+1; echo "s3";}
-                    else
-                        {$f=$f+1; echo "f3";}
-                }
+                if($connection->query("INSERT INTO staff(Name,Email,password,branch,mobile) VALUES ('$Name','$Email','$pass','$branch','$mobile')"))
+                    {$ui=$ui+1; }
+                else
+                    {$f=$f+1; }
             }
+        }
             // Close opened CSV file
-            fclose($csvFile);
-            if(($c-$ui)==0)
-            {
+        fclose($csvFile);
+        if(($c-$ui)==0)
+        {
                 //echo "success";
-                poutput("Staff Data Imported Successfully","staff.php?page=Dashboard");
-            }
-            elseif (($c-$ui)>0 || $f>0) {
+            poutput("Staff Data Imported Successfully","staff.php?page=Dashboard");
+        }
+        elseif (($c-$ui)>0 || $f>0) {
                 //echo "fail1";
-                noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
-            }
-            else{
-                //echo "fail2";
-                noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
-            }            
+            noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
         }
         else{
-            echo "Error";
-        }
-    }else{
-        echo "Invalid file";
+                //echo "fail2";
+            noutput("Some (".$f."-".($c-$ui).") staff Data Might Not Inserted","staff.php?page=Dashboard");
+        }            
     }
+    else{
+        noutput("Error ","student.php?page=Dashboard");
+    }
+}else{
+    noutput("Error file type not match","student.php?page=Dashboard");
+}
 }

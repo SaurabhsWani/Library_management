@@ -77,7 +77,7 @@ title("Magazine");
               <input class="span2 m-wrap" id="appendedInputButton" type="text" name="isbn" autocomplete="off" required="">
               <br><br>
               <input type="hidden" name="cat" value="mg">
-              <input class="btn" type="submit" name="op" value="Remove_Magazine">
+              <input class="btn" type="submit" name="op" value="Remove_">
             </div>
           </div>  <!-- /controls -->      
         </div>
