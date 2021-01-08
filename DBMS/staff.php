@@ -186,9 +186,9 @@ if ($_SESSION['category']==0):?>
         $row=mysqli_num_rows($result);
         if($row!=0){ ?>
           <form  action="staff.php" method="GET" >
-            Magazine List 
+            Staff List 
             &emsp;<input class="span4 m-wrap" type="text" name="sn" placeholder="Enter Staff Name to show">
-            Magazine List 
+            Staff List 
             &emsp;<input class="span4 m-wrap" type="number" name="cnt" autocomplete="off" placeholder="Enter records number to show" value="1">
             <input type="hidden" name="page" value="Dashboard">
             &emsp;<input type="submit" class="btn-primary" value="show">
